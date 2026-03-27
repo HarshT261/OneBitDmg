@@ -10,6 +10,7 @@ import { useModelProvider } from '@/hooks/useModelProvider'
 import SetupScreen from '@/containers/SetupScreen'
 import { route } from '@/constants/routes'
 import { predefinedProviders } from '@/constants/providers'
+import { localStorageKey } from '@/constants/localStorage'
 
 type ThreadModel = {
   id: string
@@ -19,7 +20,7 @@ type ThreadModel = {
 type SearchParams = {
   threadModel?: ThreadModel
 }
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useThreads } from '@/hooks/useThreads'
 import DropdownModelProvider from '@/containers/DropdownModelProvider'
 
@@ -41,6 +42,14 @@ function Index() {
   const threadModel = search.threadModel
   const { setCurrentThreadId } = useThreads()
   useTools()
+
+  //* После Skip без перемонтирования роутера — поднимаем флаг, иначе ре-рендер не гарантирован
+  const [setupSkippedThisSession, setSetupSkippedThisSession] =
+    useState(false)
+  const setupCompletedOrSkipped =
+    setupSkippedThisSession ||
+    (typeof window !== 'undefined' &&
+      localStorage.getItem(localStorageKey.setupCompleted) === 'true')
 
   // Conditional to check if there are any valid providers
   // required min 1 api_key or 1 model in llama.cpp or jan provider
@@ -67,8 +76,12 @@ function Index() {
     setCurrentThreadId(undefined)
   }, [setCurrentThreadId])
 
-  if (!hasValidProviders) {
-    return <SetupScreen />
+  if (!hasValidProviders && !setupCompletedOrSkipped) {
+    return (
+      <SetupScreen
+        onSkipped={() => setSetupSkippedThisSession(true)}
+      />
+    )
   }
 
   return (
