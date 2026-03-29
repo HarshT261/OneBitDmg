@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="https://github.com/anirudhmlik/onebit/raw/main/OneBitDmg/assets/logo.png" width="80" alt="OneBit AI" />
+  <img src="./assets/logo.png" width="80" alt="OneBit AI" />
 </p>
 
 <p align="center">
   <a href="https://github.com/anirudhmlik">GitHub (@anirudhmlik)</a>
   ·
-  <a href="https://github.com/anirudhmlik/onebit">Repository</a>
+  <a href="https://www.onebit-ai.in">Repository</a>
 </p>
 
 # OneBit AI
@@ -21,7 +21,7 @@ Open-source ChatGPT alternative. Run local LLMs or connect cloud models — with
 [Bug Reports](https://github.com/anirudhmlik/onebit/issues)
 
 <p align="center">
-  <img src="https://github.com/anirudhmlik/onebit/raw/main/OneBitDmg/docs/public/assets/images/app-preview.png" width="100%" alt="OneBit AI interface" />
+  <img src="./docs/public/assets/images/app-preview.png" width="100%" alt="OneBit AI interface" />
 </p>
 
 ---
