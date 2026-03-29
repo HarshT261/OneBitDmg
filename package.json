@@ -1,5 +1,6 @@
 {
   "name": "onebit-app",
+  "author": "Anirudh Malik, Harsh Tyagi",
   "private": true,
   "type": "module",
   "workspaces": {

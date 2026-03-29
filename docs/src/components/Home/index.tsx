@@ -6,8 +6,6 @@ import HuggingFaceSVG from '@/assets/icons/huggingface.svg'
 import CuteRobotBgMountainPNG from '@/assets/landing/cute-robot-bg-mountain.png'
 import { Button } from '@/components/ui/button'
 import CuteRobotFlyingPNG from '@/assets/landing/cute-robot-flying.png'
-import LogoJanSVG from '@/assets/icons/logo-jan.svg'
-import AppJanPNG from '@/assets/landing/app-jan.png'
 import TweetSection from '@/components/TweetSection'
 import FavoriteModels from '@/components/FavoriteModels'
 import { DropdownButton } from '@/components/ui/dropdown-button'
@@ -15,6 +13,9 @@ import { DropdownButton } from '@/components/ui/dropdown-button'
 import { useData } from 'nextra/data'
 import { useDiscordWidget } from '@/hooks/useDiscordWidget'
 import { formatCompactNumber, totalDownload } from '@/utils/format'
+
+const ONEBIT_LOGO = '/assets/images/onebit-logo.png'
+const APP_PREVIEW = '/assets/images/app-preview.png'
 
 const Home = () => {
   const { lastVersion, lastRelease, stars, release } = useData()
@@ -90,7 +91,7 @@ const Home = () => {
           <div className="container mx-auto relative z-10">
             <div className="flex justify-center items-center mt-14 lg:mt-20 px-4">
               <a
-                href={`https://github.com/janhq/jan/releases/tag/${lastVersion}`}
+                href={`https://github.com/anirudhmlik/onebit/releases/tag/${lastVersion}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-black/40 px-3 lg:px-4 rounded-full h-10 inline-flex items-center max-w-full animate-fade-in delay-100"
@@ -109,13 +110,13 @@ const Home = () => {
                 <div className="flex flex-col lg:flex-row items-center justify-center gap-4 animate-fade-in-up delay-300">
                   <span>
                     <img
-                      src={LogoJanSVG.src}
-                      alt="Logo Jan"
+                      src={ONEBIT_LOGO}
+                      alt="OneBit AI"
                       className="size-20 animate-wave"
                     />
                   </span>
                   <h1 className="text-[40px] lg:text-[80px] font-semibold -tracking-[2px] text-white">
-                    Meet Jan
+                    Meet OneBit AI
                   </h1>
                 </div>
                 <p className="px-4 lg:px-0 mt-2 text-lg lg:text-2xl font-medium leading-relaxed text-white animate-fade-in-up delay-500 -tracking-[0.6px]">
@@ -211,8 +212,8 @@ const Home = () => {
         <div className="hidden size-4/5 xl:size-3/5 rounded-[20px] mx-auto relative -mt-40 lg:flex animate-scale-in delay-300">
           <div className="rounded-md size-full overflow-hidden">
             <img
-              src={AppJanPNG.src}
-              alt="Jan App Interface"
+              src={APP_PREVIEW}
+              alt="OneBit AI app"
               className="w-full h-full object-fit"
             />
           </div>
@@ -221,8 +222,8 @@ const Home = () => {
         <div className="lg:hidden size-full rounded-2xl mx-auto relative mt-10 flex animate-scale-in delay-300">
           <div className="rounded-lg size-full overflow-hidden">
             <img
-              src={AppJanPNG.src}
-              alt="Jan App Interface"
+              src={APP_PREVIEW}
+              alt="OneBit AI app"
               className="w-full h-full object-fit"
             />
           </div>
@@ -250,7 +251,7 @@ const Home = () => {
                     className="text-4xl lg:text-[50px] font-semibold -tracking-[1.3px] animate-on-scroll leading-tight"
                     data-delay="200"
                   >
-                    Jan is built in public
+                    OneBit AI is built in public
                   </h1>
                   <p
                     className="-tracking-[0.6px] mt-4 text-xl text-neutral-700 animate-on-scroll lg:max-w-[512px] mx-auto"
@@ -264,7 +265,7 @@ const Home = () => {
                   data-delay="600"
                 >
                   <a
-                    href="https://github.com/janhq/jan"
+                    href="https://github.com/anirudhmlik/onebit"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -307,7 +308,7 @@ const Home = () => {
                     </Button>
                   </a>
                   <a
-                    href="https://huggingface.co/janhq"
+                    href="https://huggingface.co/models"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -363,7 +364,7 @@ const Home = () => {
                 data-delay="400"
               >
                 Our core team believes that AI should be open,{' '}
-                <br className="hidden md:block" /> and Jan is built in public.
+                <br className="hidden md:block" /> and OneBit AI is built in public.
               </p>
             </div>
             <div className="max-w-4xl mx-auto px-4">
@@ -381,7 +382,7 @@ const Home = () => {
                       </div>
                       <a
                         className="hidden md:block"
-                        href="https://github.com/janhq/jan"
+                        href="https://github.com/anirudhmlik/onebit"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -407,7 +408,7 @@ const Home = () => {
                       </p>
                       <a
                         className="md:hidden mt-4 block w-full"
-                        href="https://github.com/janhq/jan"
+                        href="https://github.com/anirudhmlik/onebit"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -504,7 +505,7 @@ const Home = () => {
                       </div>
                       <a
                         className="hidden md:block"
-                        href="https://huggingface.co/janhq"
+                        href="https://huggingface.co/models"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -534,7 +535,7 @@ const Home = () => {
                       </p>
                       <a
                         className="md:hidden block mt-4 w-full"
-                        href="https://huggingface.co/janhq"
+                        href="https://huggingface.co/models"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -578,7 +579,7 @@ const Home = () => {
               <div className="mt-10 flex flex-col lg:flex-row justify-between items-center gap-8">
                 <div className="relative animate-on-scroll" data-delay="200">
                   <h1 className="text-4xl text-center lg:text-left lg:text-5xl mx-auto font-semibold -tracking-[1.6px] text-white">
-                    Ask Jan anything
+                    Ask OneBit AI anything
                   </h1>
                 </div>
                 <div

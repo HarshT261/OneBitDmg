@@ -5,7 +5,7 @@
   "description": "Vector DB integration using sqlite-vec if available with linear fallback",
   "main": "dist/index.js",
   "module": "dist/module.js",
-  "author": "Jan <service@jan.ai>",
+  "author": "Anirudh Malik, Harsh Tyagi",
   "license": "AGPL-3.0",
   "scripts": {
     "build": "rolldown -c rolldown.config.mjs",

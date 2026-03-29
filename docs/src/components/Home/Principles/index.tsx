@@ -9,7 +9,7 @@ const Principles = () => {
             Our Principles
           </h1>
           <p className="leading-relaxed mt-2 text-black/60 dark:text-white/60 flex gap-x-2 justify-center">
-            Jan is opinionated software on what AI should be
+            OneBit AI is opinionated software on what AI should be
             <svg
               width="24"
               height="24"
@@ -187,7 +187,7 @@ const Principles = () => {
               </svg>
               <h5 className="mt-4 mb-2 text-lg font-semibold">User-owned</h5>
               <p className="text-black/60 dark:text-white/60 leading-relaxed">
-                Your data, your rules. Jan stores everything on your device in
+                Your data, your rules. OneBit AI stores everything on your device in
                 universal formats, giving you total freedom to move your data
                 without tricks or traps.
               </p>

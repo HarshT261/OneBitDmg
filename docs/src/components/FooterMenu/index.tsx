@@ -87,7 +87,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-6 gap-8">
           {/* Jan Logo and Newsletter */}
           <div className="md:col-span-1 lg:col-span-2">
-            <h2 className="text-[52px] font-bold mb-6">Jan</h2>
+            <h2 className="text-[52px] font-bold mb-6">OneBit AI</h2>
             <div>
               <div className="flex items-center gap-2 mb-3">
                 <span>

@@ -1,8 +1,8 @@
-# Contributing to Atomic Chat Core
+# Contributing to OneBit AI (Core SDK)
 
-[← Back to Main Contributing Guide](../CONTRIBUTING.md)
+[← Back to main contributing guide](../CONTRIBUTING.md)
 
-TypeScript SDK providing extension system, APIs, and type definitions for all Jan components.
+TypeScript SDK providing extension system, APIs, and type definitions for OneBit AI.
 
 ## Key Directories
 

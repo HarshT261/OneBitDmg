@@ -69,7 +69,7 @@ export default function FavoriteModels() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          All the tools you need to make Jan yours
+          All the tools you need to make OneBit AI yours
         </motion.h2>
 
         {/* Step 1: Use any model you want */}
@@ -140,8 +140,8 @@ export default function FavoriteModels() {
                 Connectors
               </h3>
               <p className="text-gray-700 mb-4 max-w-sm text-base -tracking-[0.4px]">
-                Connect your email, files, notes and calendar. Jan works where
-                you work.
+                Connect your email, files, notes and calendar. OneBit AI works
+                where you work.
               </p>
               {/* <Button
                 variant="playful-white"
@@ -193,7 +193,7 @@ export default function FavoriteModels() {
                 </span>
               </h3>
               <p className="text-gray-700 mb-4 max-w-sm text-base -tracking-[0.4px]">
-                Your context carries over, so you don’t repeat yourself. Jan
+                Your context carries over, so you don’t repeat yourself. OneBit AI
                 remembers your context and preferences.
               </p>
               {/* <Button
@@ -231,7 +231,7 @@ export default function FavoriteModels() {
                   {/* Things to remember section */}
                   <div className="">
                     <h5 className="text-xl font-bold text-black mb-4 px-4">
-                      Things Jan keeps in mind
+                      Things OneBit AI keeps in mind
                     </h5>
                     <ul className="space-y-2 text-sm text-gray-800">
                       {thingsToRemember.map((item) => (

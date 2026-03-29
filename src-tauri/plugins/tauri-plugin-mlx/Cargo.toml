@@ -1,10 +1,10 @@
 [package]
 name = "tauri-plugin-mlx"
 version = "0.6.599"
-authors = ["Jan <service@jan.ai>"]
+authors = ["Anirudh Malik", "Harsh Tyagi"]
 description = "Tauri plugin for managing MLX-Swift server processes and model loading on Apple Silicon"
 license = "MIT"
-repository = "https://github.com/janhq/jan"
+repository = "https://github.com/anirudhmlik/onebit"
 edition = "2021"
 rust-version = "1.77.2"
 exclude = ["/examples", "/dist-js", "/guest-js", "/node_modules"]

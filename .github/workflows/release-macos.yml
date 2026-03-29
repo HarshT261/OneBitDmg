@@ -221,7 +221,7 @@ jobs:
           TAR_NAME: ${{ needs.build-macos.outputs.tar_name }}
         run: |
           PUB_DATE=$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")
-          DARWIN_URL="https://github.com/AnirudhMalik/onebit/releases/download/v${VERSION}/${TAR_NAME// /.}"
+          DARWIN_URL="https://github.com/anirudhmlik/onebit/releases/download/v${VERSION}/${TAR_NAME// /.}"
 
           jq --arg version "$VERSION" \
              --arg pub_date "$PUB_DATE" \

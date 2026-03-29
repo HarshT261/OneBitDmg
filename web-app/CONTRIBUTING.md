@@ -1,6 +1,6 @@
-# Contributing to onebit Web App
+# Contributing to OneBit AI (Web App)
 
-[← Back to Main Contributing Guide](../CONTRIBUTING.md)
+[← Back to main contributing guide](../CONTRIBUTING.md)
 
 React frontend using TypeScript, TanStack Router, Radix UI, and Tailwind CSS. State is managed by React State and Zustand.
 

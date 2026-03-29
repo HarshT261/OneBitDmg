@@ -12,7 +12,7 @@ const Blog = () => {
 
   const staticCategories = [
     {
-      name: 'Building Jan',
+      name: 'Building OneBit AI',
       id: 'building-jan',
     },
     {
@@ -33,7 +33,7 @@ const Blog = () => {
         </h1>
         <div className="text-black/60 dark:text-white/60">
           <p className="text-base mt-2 leading-relaxed">
-            The latest updates from Jan. See&nbsp;
+            The latest updates from OneBit AI. See&nbsp;
             <a
               href="/changelog"
               className="text-blue-600 dark:text-blue-400 cursor-pointer"

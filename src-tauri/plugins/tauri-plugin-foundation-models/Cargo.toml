@@ -1,10 +1,10 @@
 [package]
 name = "tauri-plugin-foundation-models"
 version = "0.6.599"
-authors = ["Jan <service@jan.ai>"]
+authors = ["Anirudh Malik", "Harsh Tyagi"]
 description = "Tauri plugin for managing Apple Foundation Models server processes on macOS 26+"
 license = "MIT"
-repository = "https://github.com/janhq/jan"
+repository = "https://github.com/anirudhmlik/onebit"
 edition = "2021"
 rust-version = "1.77.2"
 exclude = ["/examples", "/dist-js", "/guest-js", "/node_modules"]

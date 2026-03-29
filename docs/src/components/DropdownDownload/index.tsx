@@ -28,22 +28,22 @@ const systemsTemplate: SystemType[] = [
   {
     name: 'Download for Mac',
     logo: FaApple,
-    fileFormat: 'Jan_{tag}_universal.dmg',
+    fileFormat: 'onebit_{tag}_universal.dmg',
   },
   {
     name: 'Download for Windows',
     logo: FaWindows,
-    fileFormat: 'Jan_{tag}_x64-setup.exe',
+    fileFormat: 'onebit_{tag}_x64-setup.exe',
   },
   {
     name: 'Download for Linux (AppImage)',
     logo: FaLinux,
-    fileFormat: 'Jan_{tag}_amd64.AppImage',
+    fileFormat: 'onebit_{tag}_amd64.AppImage',
   },
   {
     name: 'Download for Linux (deb)',
     logo: FaLinux,
-    fileFormat: 'Jan_{tag}_amd64.deb',
+    fileFormat: 'onebit_{tag}_amd64.deb',
   },
 ]
 
@@ -139,7 +139,7 @@ const DropdownDownload = ({ lastRelease }: Props) => {
 
           return {
             ...system,
-            href: `https://github.com/janhq/jan/releases/download/${lastRelease.tag_name}/${downloadUrl}`,
+            href: `https://github.com/anirudhmlik/onebit/releases/download/${lastRelease.tag_name}/${downloadUrl}`,
             size: asset ? formatFileSize(asset.size) : undefined,
           }
         })

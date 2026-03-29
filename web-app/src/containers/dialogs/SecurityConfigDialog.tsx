@@ -791,10 +791,10 @@ export function SecurityConfigDialog({
     }
 
     return (
-      <Dialog
+        <Dialog
         open={!!confirmAction.type}
         onOpenChange={() => setConfirmAction({ type: null })}
-      >
+        >
         <DialogContent className="sm:max-w-[400px]">
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>

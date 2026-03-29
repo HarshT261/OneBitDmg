@@ -1,10 +1,10 @@
 [package]
 name = "tauri-plugin-llamacpp"
 version = "0.6.599"
-authors = ["Jan <service@jan.ai>"]
-description = "Tauri plugin for managing Jan LlamaCpp server processes and model loading"
+authors = ["Anirudh Malik", "Harsh Tyagi"]
+description = "Tauri plugin for managing OneBit AI LlamaCpp server processes and model loading"
 license = "MIT"
-repository = "https://github.com/janhq/jan"
+repository = "https://github.com/anirudhmlik/onebit"
 edition = "2021"
 rust-version = "1.77.2"
 exclude = ["/examples", "/dist-js", "/guest-js", "/node_modules"]

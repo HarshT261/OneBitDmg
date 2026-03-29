@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Download and manage files and AI models in Jan.",
   "main": "dist/index.js",
-  "author": "Jan <service@jan.ai>",
+  "author": "Anirudh Malik, Harsh Tyagi",
   "license": "AGPL-3.0",
   "scripts": {
     "test": "vitest run",

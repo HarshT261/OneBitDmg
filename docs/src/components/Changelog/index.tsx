@@ -55,14 +55,14 @@ const Changelog = () => {
         </h1>
         <div className="text-black/60 dark:text-white/60">
           <p className="text-base mt-2 leading-relaxed">
-            Latest release updates from the Jan team. Check out our&nbsp;
+            Latest release updates for OneBit AI. See the&nbsp;
             <a
-              href="https://github.com/orgs/janhq/projects/30"
+              href="https://github.com/anirudhmlik/onebit"
               className="text-blue-600 dark:text-blue-400 cursor-pointer"
             >
-              Roadmap
+              repository
             </a>
-            &nbsp;{`to see what's next.`}
+            &nbsp;for releases and issues.
           </p>
 
           <div className="mt-8 w-full lg:w-2/6 mx-auto">
@@ -134,7 +134,7 @@ const Changelog = () => {
                               </p>
                             )}
                             <p className="mt-2 text-black/60 dark:text-white/60 text-medium">
-                              New release Jan App v{log?.version}
+                              New release OneBit AI v{log?.version}
                             </p>
                           </div>
                         </div>
@@ -150,7 +150,7 @@ const Changelog = () => {
 
       <div className="text-center">
         <Link
-          href="https://github.com/janhq/jan/releases"
+          href="https://github.com/anirudhmlik/onebit/releases"
           target="_blank"
           className="dark:nx-bg-neutral-900 dark:text-white bg-black text-white hover:text-white justify-center dark:border dark:border-neutral-800 flex-shrink-0 px-4 py-3 rounded-xl inline-flex items-center"
         >

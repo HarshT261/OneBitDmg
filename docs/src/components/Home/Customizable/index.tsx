@@ -10,7 +10,7 @@ const Customizable = () => {
         </h1>
         <div className="lg:w-1/2 mx-auto">
           <p className="leading-relaxed mt-2 text-black/60 dark:text-white/60">
-            Customize Jan to match your needs and preferences.
+            Customize OneBit AI to match your needs and preferences.
           </p>
         </div>
       </div>
@@ -50,7 +50,7 @@ const Customizable = () => {
           <div className="p-6">
             <h1 className="text-2xl font-medium">Extensions</h1>
             <p className="text-lg mt-4 text-black/60 dark:text-white/60">
-              Customize Jan with Extensions, that range from Cloud AI
+              Customize OneBit AI with Extensions, that range from Cloud AI
               connectors, tools, data connectors.
             </p>
           </div>

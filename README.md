@@ -1,19 +1,27 @@
-<img src="https://github.com/AnirudhMalik/onebit/raw/main/assets/logo.png" width="80" alt="onebit" />
+<p align="center">
+  <img src="https://github.com/anirudhmlik/onebit/raw/main/OneBitDmg/docs/public/assets/images/onebit-logo.png" width="80" alt="OneBit AI" />
+</p>
 
-# onebit
+<p align="center">
+  <a href="https://github.com/anirudhmlik">GitHub (@anirudhmlik)</a>
+  ·
+  <a href="https://github.com/anirudhmlik/onebit">Repository</a>
+</p>
+
+# OneBit AI
 
 Open-source ChatGPT alternative. Run local LLMs or connect cloud models — with full control and privacy.
 
-<a href="https://github.com/AnirudhMalik/onebit/stargazers"><img src="https://img.shields.io/github/stars/AnirudhMalik/onebit?style=flat&logo=github&label=Stars&color=f5c542" alt="Stars" /></a>&nbsp;
-<a href="https://github.com/AnirudhMalik/onebit/network/members"><img src="https://img.shields.io/github/forks/AnirudhMalik/onebit?style=flat&logo=github&label=Forks&color=4ac1f2" alt="Forks" /></a>&nbsp;
-<a href="https://github.com/AnirudhMalik/onebit/commits/main"><img src="https://img.shields.io/github/last-commit/AnirudhMalik/onebit?style=flat&label=Last%20Commit&color=blueviolet" alt="Last Commit" /></a>&nbsp;
+<a href="https://github.com/anirudhmlik/onebit/stargazers"><img src="https://img.shields.io/github/stars/anirudhmlik/onebit?style=flat&logo=github&label=Stars&color=f5c542" alt="Stars" /></a>&nbsp;
+<a href="https://github.com/anirudhmlik/onebit/network/members"><img src="https://img.shields.io/github/forks/anirudhmlik/onebit?style=flat&logo=github&label=Forks&color=4ac1f2" alt="Forks" /></a>&nbsp;
+<a href="https://github.com/anirudhmlik/onebit/commits/main"><img src="https://img.shields.io/github/last-commit/anirudhmlik/onebit?style=flat&label=Last%20Commit&color=blueviolet" alt="Last Commit" /></a>&nbsp;
 <img src="https://img.shields.io/badge/Built_with-Tauri-FFC131?style=flat&logo=tauri&logoColor=white" alt="Tauri" />&nbsp;
 <img src="https://img.shields.io/badge/Runtime-Node.js_≥20-339933?style=flat&logo=nodedotjs&logoColor=white" alt="Node.js" />
 
-[Bug Reports](https://github.com/AnirudhMalik/onebit/issues)
+[Bug Reports](https://github.com/anirudhmlik/onebit/issues)
 
 <p align="center">
-  <img src="https://github.com/AnirudhMalik/onebit/raw/main/assets/preview.png" width="100%" alt="onebit interface" />
+  <img src="https://github.com/anirudhmlik/onebit/raw/main/OneBitDmg/docs/public/assets/images/app-preview.png" width="100%" alt="OneBit AI interface" />
 </p>
 
 ---
@@ -22,9 +30,9 @@ Open-source ChatGPT alternative. Run local LLMs or connect cloud models — with
 
 |                       |                                                                          |
 | --------------------- | ------------------------------------------------------------------------ |
-| **macOS (Universal)** | [Releases](https://github.com/AnirudhMalik/onebit/releases) |
+| **macOS (Universal)** | [Releases](https://github.com/anirudhmlik/onebit/releases) |
 
-Download from [GitHub Releases](https://github.com/AnirudhMalik/onebit/releases).
+Download from [GitHub Releases](https://github.com/anirudhmlik/onebit/releases).
 
 ---
 
@@ -52,7 +60,7 @@ Download from [GitHub Releases](https://github.com/AnirudhMalik/onebit/releases)
 #### Run with Make
 
 ```bash
-git clone https://github.com/AnirudhMalik/onebit
+git clone https://github.com/anirudhmlik/onebit
 cd onebit
 make dev
 ```
@@ -146,7 +154,7 @@ yarn build:macos:standalone
 
 **Branding / product**
 
-- App name **onebit**, team **Anirudh Malik**, pixel logo under `web-app/public/images/` and Tauri icons; upstream “Jan” naming removed in many UI paths (see recent commits).
+- Display name **OneBit AI**; maintainers **Anirudh Malik** and **Harsh Tyagi**. Canonical logo: `docs/public/assets/images/onebit-logo.png` (synced to `assets/logo.png`, `web-app/public/images/`, `src-tauri/icons/`, and `src-tauri/app-icon.png` via `yarn build:icon`).
 
 ---
 
@@ -167,7 +175,7 @@ yarn build:macos:standalone
 If something else isn’t working:
 
 1. Copy your error logs and system specs
-2. Open an issue on [GitHub](https://github.com/AnirudhMalik/onebit/issues)
+2. Open an issue on [GitHub](https://github.com/anirudhmlik/onebit/issues)
 
 ---
 
@@ -176,15 +184,15 @@ If something else isn’t working:
 Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 <p align="center">
-  <a href="https://github.com/AnirudhMalik/onebit/issues"><img src="https://img.shields.io/badge/🐛_Report-Issues-FF4444?style=for-the-badge" alt="Report Issues" /></a>&nbsp;
-  <a href="https://github.com/AnirudhMalik/onebit/pulls"><img src="https://img.shields.io/badge/🔀_Submit-PRs-44CC11?style=for-the-badge" alt="Submit PRs" /></a>
+  <a href="https://github.com/anirudhmlik/onebit/issues"><img src="https://img.shields.io/badge/🐛_Report-Issues-FF4444?style=for-the-badge" alt="Report Issues" /></a>&nbsp;
+  <a href="https://github.com/anirudhmlik/onebit/pulls"><img src="https://img.shields.io/badge/🔀_Submit-PRs-44CC11?style=for-the-badge" alt="Submit PRs" /></a>
 </p>
 
 ---
 
 ### Contact
 
-- **Bugs**: [GitHub Issues](https://github.com/AnirudhMalik/onebit/issues)
+- **Bugs**: [GitHub Issues](https://github.com/anirudhmlik/onebit/issues)
 
 ---
 
@@ -204,5 +212,5 @@ Built on the shoulders of giants:
 ---
 
 <p align="center">
-  <sub>© 2026 onebit · Team: Anirudh Malik</sub>
+  <sub>© 2026 OneBit AI · Anirudh Malik, Harsh Tyagi</sub>
 </p>

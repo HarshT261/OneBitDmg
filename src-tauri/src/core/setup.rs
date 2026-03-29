@@ -272,7 +272,7 @@ pub fn extract_extension_manifest<R: Read>(
     Ok(None)
 }
 
-/// Install/update the bundled `jan` CLI binary.
+/// Install/update the bundled `onebit` CLI binary.
 ///
 /// - `version_changed`: pass `true` whenever the app version has changed (i.e. after an update).
 ///   When `true` the binary is always overwritten so the CLI stays in sync with the new app.
@@ -286,7 +286,7 @@ pub fn setup_jan_cli<R: Runtime>(app_handle: tauri::AppHandle<R>, version_change
         if !version_changed {
             let which_cmd = if cfg!(windows) { "where" } else { "which" };
             let mut cmd = std::process::Command::new(which_cmd);
-            cmd.arg("jan");
+            cmd.arg("onebit");
             #[cfg(windows)]
             {
                 use std::os::windows::process::CommandExt;
@@ -297,7 +297,7 @@ pub fn setup_jan_cli<R: Runtime>(app_handle: tauri::AppHandle<R>, version_change
                 .map(|o| o.status.success())
                 .unwrap_or(false)
             {
-                log::debug!("jan CLI already on PATH — skipping reinstall");
+                log::debug!("onebit CLI already on PATH — skipping reinstall");
                 return;
             }
         }
@@ -305,13 +305,13 @@ pub fn setup_jan_cli<R: Runtime>(app_handle: tauri::AppHandle<R>, version_change
         match crate::core::system::commands::install_jan_cli_sync(&app_handle) {
             Ok(status) => {
                 log::info!(
-                    "jan CLI {} to {}",
+                    "onebit CLI {} to {}",
                     if version_changed { "updated" } else { "installed" },
                     status.path.as_deref().unwrap_or("<unknown>")
                 );
             }
             Err(e) => {
-                log::warn!("jan CLI auto-install skipped: {e}");
+                log::warn!("onebit CLI auto-install skipped: {e}");
             }
         }
     });
@@ -348,7 +348,7 @@ pub fn setup_mcp<R: Runtime>(app: &App<R>) {
 
 #[cfg(desktop)]
 pub fn setup_tray(app: &App) -> tauri::Result<TrayIcon> {
-    let show_i = MenuItem::with_id(app.handle(), "open", "Open Jan", true, None::<&str>)?;
+    let show_i = MenuItem::with_id(app.handle(), "open", "Open OneBit AI", true, None::<&str>)?;
     let quit_i = MenuItem::with_id(app.handle(), "quit", "Quit", true, None::<&str>)?;
     let separator_i = PredefinedMenuItem::separator(app.handle())?;
     let menu = Menu::with_items(app.handle(), &[&show_i, &separator_i, &quit_i])?;

@@ -99,6 +99,31 @@ function parseBuildNumber(version: string): number | null {
   return match ? parseInt(match[1], 10) : null
 }
 
+/** BitNet b1.58 GGUF (bitnet.cpp) must use the bundled BitNet `llama-server`, not stock llama.cpp. */
+function isLikelyBitnetGguf(
+  metadata: { metadata?: Record<string, string> },
+  fileBasename: string
+): boolean {
+  const lower = fileBasename.toLowerCase()
+  if (
+    lower.includes('i2_s') ||
+    lower.includes('bitnet') ||
+    lower.includes('b1.58') ||
+    lower.includes('ggml-model-i2')||
+    lower.includes('onebit')
+  ) {
+    return true
+  }
+  const m = metadata.metadata ?? {}
+  for (const v of Object.values(m)) {
+    if (typeof v === 'string' && v.toLowerCase().includes('bitnet')) {
+      return true
+    }
+  }
+  const arch = (m['general.architecture'] ?? '').toLowerCase()
+  return arch.includes('bitnet')
+}
+
 // Folder structure for llamacpp extension:
 // <Jan's data folder>/llamacpp
 //  - models/<modelId>/
@@ -333,6 +358,44 @@ export default class llamacpp_extension extends AIEngine {
       }
     } catch (e) {
       logger.warn('Failed to install bundled BitNet backend:', e)
+    }
+  }
+
+  private isBitnetBackendString(backendString: string): boolean {
+    const parts = backendString.split('/')
+    return (
+      parts.length >= 2 && parts[1]!.toLowerCase().includes('bitnet')
+    )
+  }
+
+  /** Ensures bundled BitNet backend is installed and sets `version_backend` when missing. */
+  private async ensureBitnetBackendSelected(): Promise<void> {
+    if (this.isBitnetBackendString(this.config.version_backend)) return
+
+    const janDataFolderPath = await getJanDataFolderPath()
+    const backendsDir = await joinPath([
+      janDataFolderPath,
+      'llamacpp',
+      'backends',
+    ])
+    const bitnetResult = await installBundledBackend(backendsDir, 'bitnet')
+    let target = bitnetResult.backend_string ?? undefined
+    if (!target) {
+      const backends = await listSupportedBackends()
+      const bitnet = backends.find((b) =>
+        b.backend.toLowerCase().includes('bitnet')
+      )
+      if (bitnet) target = `${bitnet.version}/${bitnet.backend}`
+    }
+    if (!target) {
+      logger.warn(
+        'BitNet backend not available (bundle missing or install failed). Import/load of BitNet GGUF may fail until Settings → Llama.cpp uses the BitNet backend.'
+      )
+      return
+    }
+    const { wasUpdated } = await this.updateBackend(target)
+    if (wasUpdated) {
+      logger.info(`Active backend set to BitNet for this model: ${target}`)
     }
   }
 
@@ -1352,10 +1415,12 @@ export default class llamacpp_extension extends AIEngine {
     const janDataFolderPath = await getJanDataFolderPath()
     const fullModelPath = await joinPath([janDataFolderPath, modelPath])
     let isEmbedding = false
+    let modelMetadata: Awaited<ReturnType<typeof readGgufMetadata>> | null =
+      null
 
     try {
       // Validate main model file
-      const modelMetadata = await readGgufMetadata(fullModelPath)
+      modelMetadata = await readGgufMetadata(fullModelPath)
       logger.info(
         `Model GGUF validation successful: version ${modelMetadata.version}, tensors: ${modelMetadata.tensor_count}`
       )
@@ -1381,6 +1446,17 @@ export default class llamacpp_extension extends AIEngine {
           error.message || 'File format validation failed'
         }`
       )
+    }
+
+    if (!isEmbedding && modelMetadata) {
+      try {
+        const name = await basename(fullModelPath)
+        if (isLikelyBitnetGguf(modelMetadata, name)) {
+          await this.ensureBitnetBackendSelected()
+        }
+      } catch (e) {
+        logger.warn('BitNet backend auto-select on import failed:', e)
+      }
     }
 
     // Calculate file sizes
@@ -1534,6 +1610,36 @@ export default class llamacpp_extension extends AIEngine {
     isEmbedding: boolean = false,
     bypassAutoUnload: boolean = false
   ): Promise<SessionInfo> {
+    if (!isEmbedding) {
+      try {
+        const janDataFolderPath = await getJanDataFolderPath()
+        const modelConfigPath = await joinPath([
+          this.providerPath,
+          'models',
+          modelId,
+          'model.yml',
+        ])
+        const earlyModelConfig = await invoke<ModelConfig>('read_yaml', {
+          path: modelConfigPath,
+        })
+        const fullModelPathForBitnet = await joinPath([
+          janDataFolderPath,
+          earlyModelConfig.model_path,
+        ])
+        const meta = await readGgufMetadata(fullModelPathForBitnet)
+        const base = await basename(fullModelPathForBitnet)
+        const merged = { ...this.config, ...(overrideSettings ?? {}) }
+        if (
+          isLikelyBitnetGguf(meta, base) &&
+          !this.isBitnetBackendString(merged.version_backend)
+        ) {
+          await this.ensureBitnetBackendSelected()
+        }
+      } catch (e) {
+        logger.warn('BitNet backend auto-select before load skipped:', e)
+      }
+    }
+
     const loadedModels = await this.getLoadedModels()
 
     // Get OTHER models that are currently loading (exclude current model)

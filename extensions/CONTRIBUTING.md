@@ -1,8 +1,8 @@
-# Contributing to Atomic Chat Extensions
+# Contributing to OneBit AI (Extensions)
 
-[← Back to Main Contributing Guide](../CONTRIBUTING.md)
+[← Back to main contributing guide](../CONTRIBUTING.md)
 
-Extensions add specific features to Jan as self-contained modules.
+Extensions add specific features to OneBit AI as self-contained modules.
 
 ## Current Extensions
 

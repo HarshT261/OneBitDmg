@@ -6,7 +6,7 @@
     "windows": [
       {
         "label": "main",
-        "title": "onebit",
+        "title": "OneBit AI",
         "devtools": true,
         "width": 1200,
         "minWidth": 1024,
@@ -39,7 +39,6 @@
     "macOS": {
       "entitlements": "./Entitlements.plist",
       "dmg": {
-        "background": "./icons/dmg/background.png",
         "appPosition": {
           "x": 144,
           "y": 255

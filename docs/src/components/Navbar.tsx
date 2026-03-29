@@ -6,7 +6,8 @@ import { FaDiscord, FaGithub } from 'react-icons/fa'
 import { FiDownload } from 'react-icons/fi'
 import { FaXTwitter, FaLinkedinIn } from 'react-icons/fa6'
 import { Button } from './ui/button'
-import LogoJanSVG from '@/assets/icons/logo-jan.svg'
+const ONEBIT_LOGO =
+  'https://github.com/anirudhmlik/onebit/raw/main/OneBitDmg/docs/public/assets/images/onebit-logo.png'
 
 const MENU_ITEMS = [
   { name: 'Docs', href: '/docs' },
@@ -64,11 +65,11 @@ const Navbar = ({ noScroll }: { noScroll?: boolean }) => {
       <div className="flex nextra-wrap-container w-full mx-auto h-full justify-between items-center">
         <div>
           <a href="/" className="flex items-center gap-2">
-            <img src={LogoJanSVG.src} alt="Jan" className="w-6 h-6" />
+            <img src={ONEBIT_LOGO} alt="OneBit AI" className="w-6 h-6" />
             <span
               className={cn('text-xl font-bold', !isLanding && '!text-black')}
             >
-              Jan
+              OneBit AI
             </span>
           </a>
         </div>
@@ -109,7 +110,7 @@ const Navbar = ({ noScroll }: { noScroll?: boolean }) => {
                       : 'bg-white text-black hover:bg-white hover:text-black'
                   )}
                 >
-                  Download Jan
+                  Download OneBit AI
                 </Button>
               </a>
             </li>
@@ -217,7 +218,7 @@ const Navbar = ({ noScroll }: { noScroll?: boolean }) => {
             <div className="p-6">
               {/* Header with close button */}
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-black">Jan</h2>
+                <h2 className="text-2xl font-bold text-black">OneBit AI</h2>
                 <button
                   className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200"
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -301,7 +302,7 @@ const Navbar = ({ noScroll }: { noScroll?: boolean }) => {
                     rel="noopener noreferrer"
                   >
                     <FiDownload className="size-6 mr-2" />
-                    Download Jan
+                    Download OneBit AI
                   </a>
                 </Button>
               </div>

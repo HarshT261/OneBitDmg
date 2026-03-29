@@ -1,6 +1,6 @@
-# Contributing to Tauri Backend
+# Contributing to OneBit AI (Tauri backend)
 
-[← Back to Main Contributing Guide](../CONTRIBUTING.md)
+[← Back to main contributing guide](../CONTRIBUTING.md)
 
 Rust backend that handles native system integration, file operations, and process management.
 

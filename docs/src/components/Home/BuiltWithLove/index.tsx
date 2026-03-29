@@ -18,7 +18,7 @@ const BuiltWithLove = () => {
           </h1>
           <p className="leading-relaxed text-black/60 dark:text-white/60 mt-2">
             Our core team believes that AI should be open,
-            <br className="hidden lg:block" /> and Jan is built in public
+            <br className="hidden lg:block" /> and OneBit AI is built in public
           </p>
         </div>
         <div className="flex flex-col lg:flex-row gap-8 mt-8 items-center justify-center">

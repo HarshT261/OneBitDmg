@@ -112,8 +112,8 @@ export function createLanguageModel(
       // OpenRouter identification headers
       ...(provider.provider === 'openrouter'
         ? {
-            'HTTP-Referer': 'https://jan.ai',
-            'X-Title': 'onebit',
+            'HTTP-Referer': 'https://github.com/anirudhmlik/onebit',
+            'X-Title': 'OneBit AI',
           }
         : {}),
     },

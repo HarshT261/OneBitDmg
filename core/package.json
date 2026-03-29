@@ -1,12 +1,12 @@
 {
   "name": "@janhq/core",
   "version": "0.1.10",
-  "description": "Core library for the Jan AI application framework",
+  "description": "Core library for the OneBit AI application",
   "keywords": [
-    "jan",
+    "onebit",
     "core"
   ],
-  "homepage": "https://jan.ai",
+  "homepage": "https://github.com/anirudhmlik/onebit",
   "license": "AGPL-3.0",
   "main": "dist/index.js",
   "typings": "dist/types/index.d.ts",
@@ -14,7 +14,7 @@
     "dist",
     "types"
   ],
-  "author": "Jan <service@jan.ai>",
+  "author": "Anirudh Malik, Harsh Tyagi",
   "scripts": {
     "lint": "tslint --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "test": "vitest run",

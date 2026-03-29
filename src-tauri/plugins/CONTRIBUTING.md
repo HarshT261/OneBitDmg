@@ -1,6 +1,6 @@
-# Contributing to Tauri Plugins
+# Contributing to OneBit AI (Tauri plugins)
 
-[← Back to Main Contributing Guide](../../CONTRIBUTING.md) | [← Back to Tauri Guide](../CONTRIBUTING.md)
+[← Back to main contributing guide](../../CONTRIBUTING.md) | [← Tauri guide](../CONTRIBUTING.md)
 
 Native Rust plugins for hardware access, process management, and system integration.
 

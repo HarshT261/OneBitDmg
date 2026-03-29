@@ -96,7 +96,7 @@ const SliderMobile = () => {
                         width="100%"
                         height="260"
                         src={`https://www.youtube.com/embed/${item.id}`}
-                        title="Install Jan to Run LLM Offline and Local First"
+                        title="Install OneBit AI to Run LLM Offline and Local First"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowFullScreen
                         className="rounded-xl"

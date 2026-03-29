@@ -61,7 +61,7 @@ const CTANewsletter = () => {
                 The Soul of a New Machine
               </h1>
               <p className="leading-relaxed text-black/60 dark:text-white/60">
-                Follow our AI research and journey in building Jan
+                Follow our AI research and journey in building OneBit AI
               </p>
 
               <div className="w-full lg:w-1/2 mt-8 mx-auto">

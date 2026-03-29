@@ -63,7 +63,8 @@ yrun build:foundation-models-server
 yrun build:cli
 
 echo "==> Tauri universal binary + DMG"
-yrun tauri build --target universal-apple-darwin
+# Tauri 2.x maps env CI to --ci; CI=1 is invalid (expects true/false). Unset for local/IDE builds.
+env -u CI -u GITHUB_ACTIONS yrun tauri build --target universal-apple-darwin
 
 DMG=$(ls -1 "$ROOT/src-tauri/target/universal-apple-darwin/release/bundle/dmg/"*.dmg 2>/dev/null | head -1 || true)
 if [[ -n "$DMG" ]]; then

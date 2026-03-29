@@ -57,7 +57,7 @@ const APIStructure = () => {
         </h1>
         <div className="lg:w-1/2 mx-auto">
           <p className="leading-relaxed mt-2 text-black/60 dark:text-white/60">
-            Jan provides an OpenAI-equivalent API server at localhost:&nbsp;
+            OneBit AI provides an OpenAI-equivalent API server at localhost:&nbsp;
             <span className="bg-blue-600 text-white font-bold px-2 py-0.5 rounded-md">
               1337
             </span>{' '}

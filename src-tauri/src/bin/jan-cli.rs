@@ -1,7 +1,7 @@
-//! jan — headless CLI for Jan.
+//! onebit — headless CLI for OneBit AI.
 //!
-//! Shares all core logic with the Jan desktop app.
-//! Build with: cargo build --features cli --bin jan
+//! Shares core logic with the OneBit AI desktop app.
+//! Build with: cargo build --features cli --bin jan-cli
 
 use std::collections::HashMap;
 use std::sync::Arc;
@@ -26,20 +26,20 @@ use std::path::PathBuf;
 
 #[derive(Parser)]
 #[command(
-    name = "jan",
+    name = "onebit",
     about = "Serve local AI models and wire them to agents — no cloud required",
-    long_about = "Jan runs local AI models (LlamaCPP / MLX) and exposes them via an\n\
-OpenAI-compatible API, then wires AI coding agent like Claude Code\n\
-directly to your own hardware — no cloud account, no usage fees, full privacy.\n\n\
-Models downloaded in the Jan desktop app are automatically available here.",
+    long_about = "OneBit AI runs local models (LlamaCPP / MLX) and exposes them via an\n\
+OpenAI-compatible API, then wires AI coding agents like Claude Code\n\
+to your own hardware — no cloud account, no usage fees, full privacy.\n\n\
+Models downloaded in the OneBit AI app are automatically available here.",
     after_help = "Examples:\n  \
-  jan launch claude                                      # pick a model, then run Claude Code against it\n  \
-  jan launch claude --model janhq/Jan-code-4b-gguf       # use a specific model\n  \
-  jan launch openclaw --model janhq/Jan-code-4b-gguf     # wire openclaw to a local model\n  \
-  jan serve janhq/Jan-code-4b-gguf                       # expose a model at localhost:6767/v1\n  \
-  jan serve janhq/Jan-code-4b-gguf --fit                 # auto-fit context to available VRAM\n  \
-  jan serve janhq/Jan-code-4b-gguf --detach              # run in the background\n  \
-  jan models list                                        # show all installed models",
+  onebit launch claude                                      # pick a model, then run Claude Code against it\n  \
+  onebit launch claude --model janhq/Jan-code-4b-gguf       # use a specific model\n  \
+  onebit launch openclaw --model janhq/Jan-code-4b-gguf     # wire openclaw to a local model\n  \
+  onebit serve janhq/Jan-code-4b-gguf                       # expose a model at localhost:6767/v1\n  \
+  onebit serve janhq/Jan-code-4b-gguf --fit                 # auto-fit context to available VRAM\n  \
+  onebit serve janhq/Jan-code-4b-gguf --detach              # run in the background\n  \
+  onebit models list                                        # show all installed models",
     version
 )]
 struct Cli {

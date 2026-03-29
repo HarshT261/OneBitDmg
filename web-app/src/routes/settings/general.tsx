@@ -546,7 +546,7 @@ function General() {
                   description={t('settings:general.documentationDesc')}
                   actions={
                     <a
-                      href="https://jan.ai/docs"
+                      href="https://github.com/anirudhmlik/onebit#readme"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -562,7 +562,7 @@ function General() {
                   description={t('settings:general.releaseNotesDesc')}
                   actions={
                     <a
-                      href="https://github.com/AnirudhMalik/onebit/releases"
+                      href="https://github.com/anirudhmlik/onebit/releases"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -584,7 +584,7 @@ function General() {
                   description={t('settings:general.githubDesc')}
                   actions={
                     <a
-                      href="https://github.com/AnirudhMalik/onebit"
+                      href="https://github.com/anirudhmlik/onebit"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -622,7 +622,7 @@ function General() {
                   description={t('settings:general.reportAnIssueDesc')}
                   actions={
                     <a
-                      href="https://github.com/AnirudhMalik/onebit/issues/new"
+                      href="https://github.com/anirudhmlik/onebit/issues/new"
                       target="_blank"
                     >
                       <div className="flex items-center gap-1">

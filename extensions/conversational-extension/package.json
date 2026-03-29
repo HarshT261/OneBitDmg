@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Enables conversations and state persistence via your file system.",
   "main": "dist/index.js",
-  "author": "Jan <service@jan.ai>",
+  "author": "Anirudh Malik, Harsh Tyagi",
   "license": "MIT",
   "scripts": {
     "build": "rolldown -c rolldown.config.mjs",

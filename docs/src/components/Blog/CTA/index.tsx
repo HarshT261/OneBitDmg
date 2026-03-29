@@ -19,7 +19,7 @@ const CTABlog = () => {
         The Soul of a New Machine
       </h1>
       <p className="leading-relaxed text-black/60 dark:text-white/60">
-        {`To stay updated on all of Jan's research, subscribe to The Soul of a New Machine`}
+        {`To stay updated on OneBit AI, subscribe to The Soul of a New Machine`}
       </p>
       <div className="mt-4 w-full lg:w-1/2 mx-auto">
         <NewsletterForm id={9} />

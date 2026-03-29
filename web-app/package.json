@@ -2,6 +2,7 @@
   "name": "@janhq/web-app",
   "private": true,
   "version": "1.1.6",
+  "author": "Anirudh Malik, Harsh Tyagi",
   "type": "module",
   "scripts": {
     "dev": "vite",

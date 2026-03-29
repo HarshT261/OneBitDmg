@@ -5,7 +5,7 @@
   "description": "Registers RAG tools and orchestrates retrieval across parser, embeddings, and vector DB",
   "main": "dist/index.js",
   "module": "dist/module.js",
-  "author": "Jan <service@jan.ai>",
+  "author": "Anirudh Malik, Harsh Tyagi",
   "license": "AGPL-3.0",
   "scripts": {
     "build": "rolldown -c rolldown.config.mjs",

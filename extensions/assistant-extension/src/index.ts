@@ -208,7 +208,7 @@ export default class JanAssistantExtension extends AssistantExtension {
   }
 
   /**
-   * Migration v3: Replace remaining upstream (Jan / Menlo / Atomic) wording with onebit branding.
+   * Migration v3: Replace remaining upstream product wording with OneBit AI branding.
    */
   private async migrateLegacyUpstreamBranding(): Promise<void> {
     const legacyMarkers = [

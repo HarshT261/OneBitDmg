@@ -10,8 +10,8 @@ const isCustomImageAvatar = (avatar: React.ReactNode): avatar is string => {
 }
 
 const isOnebitLogoPath = (src: string) =>
-  src.includes('atomic-chat-logo') ||
   src.includes('transparent-logo') ||
+  src.includes('logo-app') ||
   src.includes('onebit-logo')
 
 /**

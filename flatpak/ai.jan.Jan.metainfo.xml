@@ -3,9 +3,9 @@
   <id>ai.jan.Jan</id>
   <metadata_license>FSFAP</metadata_license>
   <project_license>Apache-2.0</project_license>
-  <developer_name>Anirudh Malik</developer_name>
+  <developer_name>Anirudh Malik, Harsh Tyagi</developer_name>
 
-  <name>onebit</name>
+  <name>OneBit AI</name>
   <icon type="stock">ai.jan.Jan</icon>
 
   <summary>Private offline AI assistant</summary>
@@ -20,10 +20,10 @@
 
   <description>
     <p>
-      Jan is an open source alternative to ChatGPT that runs 100% offline on your computer.
+      OneBit AI is an open source alternative to ChatGPT that can run fully offline on your computer.
     </p>
     <p xml:lang="pl">
-      Jan to otwartoźródłowa alternatywa dla ChatGPT, która działa w 100% bez dostępu do sieci na Twoim komputerze.
+      OneBit AI to otwartoźródłowa alternatywa dla ChatGPT, która może działać w 100% bez dostępu do sieci na Twoim komputerze.
     </p>
 
     <p>Features</p>
@@ -38,62 +38,35 @@
       <li xml:lang="pl">Własne asystenty: Twórz asystenty wyspecjalizowane do pisania, kodowania, podsumowywania itd.</li>
 
       <li>OpenAI-compatible API: Includes a local API server at localhost:1337 for tools expecting the OpenAI format</li>
-      <li xml:lang="pl">Interfejs API kompatybilny z OpenAI: Jan posiada lokalny serwer API, dostępny pod adresem localhost:1337, dla narzędzi zgodnych z formatem OpenAI.</li>
+      <li xml:lang="pl">Interfejs API kompatybilny z OpenAI: lokalny serwer API pod adresem localhost:1337 dla narzędzi zgodnych z formatem OpenAI.</li>
 
       <li>MCP support: Integrates the Model Context Protocol for enhanced workflows and tooling</li>
-      <li xml:lang="pl">Obsługa MCP: Jan obsługuje Model Context Protocol dla lepszego przepływu pracy i obsługi narzędzi.</li>
+      <li xml:lang="pl">Obsługa MCP: Model Context Protocol dla lepszego przepływu pracy i obsługi narzędzi.</li>
 
-      <li>Privacy-aware design: Jan works offline by default. Cloud access is optional and user-controlled</li>
-      <li xml:lang="pl">Projekt uwzględniający prywatność: Jan domyślnie działa w trybie bez dostępu do sieci. Dostęp do chmury jest opcjonalny i pozostaje pod kontrolą użytkownika.</li>
+      <li>Privacy-aware design: Works offline by default. Cloud access is optional and user-controlled</li>
+      <li xml:lang="pl">Projekt uwzględniający prywatność: domyślnie tryb offline. Dostęp do chmury jest opcjonalny i pozostaje pod kontrolą użytkownika.</li>
     </ul>
 
     <p>
-      onebit is actively maintained by Anirudh Malik.  
-      Feedback, bug reports and feature requests are welcomed through GitHub.
+      Maintained by Anirudh Malik and Harsh Tyagi. Feedback and issues are welcome on GitHub.
     </p>
     <p xml:lang="pl">
-      Aplikacja onebit jest aktywnie utrzymywana przez Anirudh Malik.
-      Informacje zwrotne, zgłoszenia błędów i prośby o nowe funkcje są mile widziane za pośrednictwem platformy GitHub.
+      Aktywnie utrzymywane przez Anirudha Malika i Harsha Tyagiego. Informacje zwrotne i zgłoszenia — na GitHubie.
     </p>
   </description>
 
   <launchable type="desktop-id">ai.jan.Jan.desktop</launchable>
   <screenshots>
-  <screenshot>
-    <image>https://catalog.jan.ai/flatpak/jan_screenshot_1.png</image>
-    <caption>Blank Jan page with 0 threads</caption>
-    <caption xml:lang="pl">Pusta strona Jan bez żadnych wątków</caption>
-  </screenshot>
   <screenshot type="default">
-    <image>https://catalog.jan.ai/flatpak/jan_screenshot_2.png</image>
-    <caption>Jan using a search MCP to gather information</caption>
-    <caption xml:lang="pl">Aplikacja Jan używająca wyszukiwania MCP celem zgromadzenia informacji</caption>
-  </screenshot>
-  <screenshot>
-    <image>https://catalog.jan.ai/flatpak/jan_screenshot_3.png</image>
-    <caption>Assistant creation screen</caption>
-    <caption xml:lang="pl">Ekran tworzenia asystenta</caption>
-  </screenshot>
-  <screenshot>
-    <image>https://catalog.jan.ai/flatpak/jan_screenshot_4.png</image>
-    <caption>Jan Hub</caption>
-    <caption xml:lang="pl">Centrum modeli Jan</caption>
-  </screenshot>
-  <screenshot>
-    <image>https://catalog.jan.ai/flatpak/jan_screenshot_5.png</image>
-    <caption>Llama.cpp screen showcasing the models</caption>
-    <caption xml:lang="pl">Ekran Llama.cpp z listą modeli</caption>
-  </screenshot>
-  <screenshot>
-    <image>https://catalog.jan.ai/flatpak/jan_screenshot_6.png</image>
-    <caption>MCP Settings</caption>
-    <caption xml:lang="pl">Ustawienia MCP</caption>
+    <image>https://github.com/anirudhmlik/onebit/raw/main/OneBitDmg/docs/public/assets/images/app-preview.png</image>
+    <caption>OneBit AI main interface</caption>
+    <caption xml:lang="pl">Główny interfejs OneBit AI</caption>
   </screenshot>
 </screenshots>
 
-  <url type="homepage">https://jan.ai/</url>
-  <url type="bugtracker">https://github.com/janhq/jan/issues</url>
-  <url type="vcs-browser">https://github.com/janhq/jan</url>
+  <url type="homepage">https://github.com/anirudhmlik/onebit</url>
+  <url type="bugtracker">https://github.com/anirudhmlik/onebit/issues</url>
+  <url type="vcs-browser">https://github.com/anirudhmlik/onebit</url>
 
   <content_rating type="oars-1.1"/>
 
@@ -104,35 +77,9 @@
   </keywords>
 
   <releases>
-    <release version="0.7.8" date="2026-03-11">
+    <release version="1.1.6" date="2026-03-29">
       <description>
-        <p>OpenClaw integration, a new Jan CLI, and automatic context management for uninterrupted conversations</p>
-      </description>
-    </release>
-    <release version="0.7.7" date="2026-02-11">
-      <description>
-        <p>Native MLX support for Apple silicon, app-wide UI refresh, file uploads in Projects, and improved API server capabilities</p>
-      </description>
-    </release>
-    <release version="0.7.6" date="2026-01-27">
-    <description>
-      <p>Unified interface seamlessly integrated with the groundbreaking Jan V3 model, delivering an unparalleled AI experience</p>
-    </description>
-  </release>
-    <release version="0.7.5" date="2025-12-08">
-      <description>
-        <p>Fixed Windows model import failure when base names differed</p>
-      </description>
-    </release>
-    <release version="0.7.4" date="2025-12-05">
-      <description>
-        <p>Streamlined Onboarding and Enhanced File Attachments</p>
-      </description>
-    </release>
-    <release version="0.7.3" date="2025-11-13">
-      <description>
-        <p>Enhanced Browser Control and Smarter Interactions</p>
-        <p xml:lang="pl">Ulepszona kontrola przeglądarki i bardziej inteligentne interakcje</p>
+        <p>Branding and credits: OneBit AI; maintainers Anirudh Malik and Harsh Tyagi.</p>
       </description>
     </release>
   </releases>

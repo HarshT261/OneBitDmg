@@ -372,12 +372,12 @@ pub struct CliInstallStatus {
     pub path: Option<String>,
 }
 
-/// Check if the `jan` CLI binary is accessible on PATH.
+/// Check if the `onebit` CLI binary is accessible on PATH.
 #[tauri::command]
 pub async fn check_jan_cli_installed() -> CliInstallStatus {
     let which_cmd = if cfg!(windows) { "where" } else { "which" };
     let mut cmd = std::process::Command::new(which_cmd);
-    cmd.arg("jan");
+    cmd.arg("onebit");
 
     #[cfg(windows)]
     {
@@ -428,7 +428,11 @@ pub fn install_jan_cli_sync<R: Runtime>(
     } else {
         "jan-cli"
     };
-    let dest_bin_name = if cfg!(windows) { "jan.exe" } else { "jan" };
+    let dest_bin_name = if cfg!(windows) {
+        "onebit.exe"
+    } else {
+        "onebit"
+    };
     let resource_bin_dir = app_handle
         .path()
         .resource_dir()
@@ -438,14 +442,14 @@ pub fn install_jan_cli_sync<R: Runtime>(
     let dest = resource_bin_dir.join(dest_bin_name);
 
     if !bundled.exists() && !dest.exists() {
-        return Err("Jan CLI binary not bundled with this version of Jan.".to_string());
+        return Err("OneBit AI CLI binary not bundled with this app version.".to_string());
     }
 
     #[cfg(windows)]
     {
         if bundled.exists() {
             if let Err(e) = std::fs::rename(&bundled, &dest) {
-                log::warn!("Could not rename jan-cli.exe to jan.exe: {}", e);
+                log::warn!("Could not rename jan-cli.exe to onebit.exe: {}", e);
             }
         }
         add_to_path_windows(&resource_bin_dir)?;
@@ -462,11 +466,16 @@ pub fn install_jan_cli_sync<R: Runtime>(
         let dest = install_dir.join(dest_bin_name);
 
         std::fs::copy(&bundled, &dest)
-            .map_err(|e| format!("Failed to copy jan to {}: {}", dest.display(), e))?;
+            .map_err(|e| format!("Failed to copy onebit to {}: {}", dest.display(), e))?;
 
         use std::os::unix::fs::PermissionsExt;
         std::fs::set_permissions(&dest, std::fs::Permissions::from_mode(0o755))
             .map_err(|e| e.to_string())?;
+
+        let legacy = install_dir.join("jan");
+        if legacy.exists() {
+            let _ = std::fs::remove_file(&legacy);
+        }
 
         Ok(CliInstallStatus {
             installed: true,
@@ -475,7 +484,7 @@ pub fn install_jan_cli_sync<R: Runtime>(
     }
 }
 
-/// Copy the bundled `jan` binary to the system PATH (Tauri command wrapper).
+/// Copy the bundled CLI binary to the user PATH (Tauri command wrapper).
 #[tauri::command]
 pub async fn install_jan_cli<R: Runtime>(
     app_handle: AppHandle<R>,
@@ -483,7 +492,7 @@ pub async fn install_jan_cli<R: Runtime>(
     install_jan_cli_sync(&app_handle)
 }
 
-/// Remove the installed `jan` CLI binary.
+/// Remove the installed `onebit` CLI binary (and legacy `jan` if present).
 #[tauri::command]
 pub fn uninstall_jan_cli() -> Result<(), String> {
     #[cfg(windows)]
@@ -495,10 +504,14 @@ pub fn uninstall_jan_cli() -> Result<(), String> {
 
     #[cfg(unix)]
     {
-        let dest = jan_cli_install_dir()?.join("jan");
-        if dest.exists() {
-            std::fs::remove_file(&dest)
-                .map_err(|e| format!("Failed to remove Jan CLI from {}: {}", dest.display(), e))?;
+        let dir = jan_cli_install_dir()?;
+        for name in ["onebit", "jan"] {
+            let dest = dir.join(name);
+            if dest.exists() {
+                std::fs::remove_file(&dest).map_err(|e| {
+                    format!("Failed to remove CLI from {}: {}", dest.display(), e)
+                })?;
+            }
         }
         Ok(())
     }
@@ -607,12 +620,12 @@ pub fn clear_claude_code_env() -> Result<(), String> {
     }
 }
 
-/// Determine the best writable directory for the Jan CLI install (Unix only).
+/// Determine the best writable directory for the OneBit AI CLI install (Unix only).
 #[cfg(unix)]
 fn jan_cli_install_dir() -> Result<PathBuf, String> {
     let usr_local_bin = PathBuf::from("/usr/local/bin");
     if usr_local_bin.exists() {
-        let probe = usr_local_bin.join(".jan_write_probe");
+        let probe = usr_local_bin.join(".onebit_write_probe");
         if std::fs::write(&probe, b"").is_ok() {
             let _ = std::fs::remove_file(&probe);
             return Ok(usr_local_bin);

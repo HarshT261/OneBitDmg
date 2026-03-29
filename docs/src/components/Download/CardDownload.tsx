@@ -23,7 +23,7 @@ const systemsTemplate: SystemType[] = [
     name: 'Mac ',
     label: 'Universal',
     logo: FaApple,
-    fileFormat: 'Jan_{tag}_universal.dmg',
+    fileFormat: 'onebit_{tag}_universal.dmg',
   },
   {
     name: 'Windows',
@@ -35,13 +35,13 @@ const systemsTemplate: SystemType[] = [
     name: 'Linux (AppImage)',
     label: 'AppImage',
     logo: FaLinux,
-    fileFormat: 'Jan_{tag}_amd64.AppImage',
+    fileFormat: 'onebit_{tag}_amd64.AppImage',
   },
   {
     name: 'Linux (deb)',
     label: 'Deb',
     logo: FaLinux,
-    fileFormat: 'Jan_{tag}_amd64.deb',
+    fileFormat: 'onebit_{tag}_amd64.deb',
   },
 ]
 
@@ -72,7 +72,7 @@ export default function CardDownload({ lastRelease }: Props) {
 
           return {
             ...system,
-            href: `https://github.com/janhq/jan/releases/download/${lastRelease.tag_name}/${downloadUrl}`,
+            href: `https://github.com/anirudhmlik/onebit/releases/download/${lastRelease.tag_name}/${downloadUrl}`,
             size: asset ? formatFileSize(asset.size) : undefined,
           }
         })
