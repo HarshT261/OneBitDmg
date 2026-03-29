@@ -918,10 +918,15 @@ fn copy_dir_recursive(src: &PathBuf, dst: &PathBuf) -> Result<(), String> {
     Ok(())
 }
 
+/// `bundle` selects which app-bundled inference binary to install into the user data backends folder.
+/// - `None` or `"llamacpp"` — stock llama.cpp `llama-server` from `resources/llamacpp-backend/`.
+/// - `"bitnet"` — Microsoft BitNet's `llama-server` (bitnet.cpp build) from `resources/bitnet-backend/`.
+///   Required to run BitNet b1.58 GGUF (e.g. `ggml-model-i2_s.gguf`); the standard backend cannot load these models.
 #[tauri::command]
 pub async fn install_bundled_backend<R: Runtime>(
     app: tauri::AppHandle<R>,
     backends_dir: String,
+    bundle: Option<String>,
 ) -> Result<BundledBackendResult, String> {
     let not_bundled = Ok(BundledBackendResult {
         installed: false,
@@ -930,10 +935,29 @@ pub async fn install_bundled_backend<R: Runtime>(
         backend: None,
     });
 
+    let bundle_key = bundle
+        .as_deref()
+        .map(str::trim)
+        .filter(|s| !s.is_empty())
+        .unwrap_or("llamacpp");
+    let is_bitnet = bundle_key.eq_ignore_ascii_case("bitnet");
+
     let mut resource_dir: Option<PathBuf> = None;
 
+    let (resource_candidates, dev_relative): (&[&str], &str) = if is_bitnet {
+        (
+            &["resources/bitnet-backend", "bitnet-backend"],
+            "bitnet-backend",
+        )
+    } else {
+        (
+            &["resources/llamacpp-backend", "llamacpp-backend"],
+            "llamacpp-backend",
+        )
+    };
+
     // Try Tauri resource resolution (works in production builds)
-    for candidate in &["resources/llamacpp-backend", "llamacpp-backend"] {
+    for candidate in resource_candidates {
         if let Ok(p) = app.path().resolve(candidate, tauri::path::BaseDirectory::Resource) {
             log::info!("[install_bundled_backend] Trying resource path '{}' → {}", candidate, p.display());
             if p.join("version.txt").exists() {
@@ -946,7 +970,8 @@ pub async fn install_bundled_backend<R: Runtime>(
     // Dev mode fallback: resources live in src-tauri/resources/ relative to plugin crate
     if resource_dir.is_none() {
         let dev_path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-            .join("../../resources/llamacpp-backend");
+            .join("../../resources")
+            .join(dev_relative);
         log::info!("[install_bundled_backend] Trying dev fallback → {}", dev_path.display());
         if dev_path.join("version.txt").exists() {
             resource_dir = Some(dev_path);

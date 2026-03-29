@@ -1,5 +1,5 @@
 {
-  "name": "jan-app",
+  "name": "onebit-app",
   "private": true,
   "type": "module",
   "workspaces": {
@@ -15,6 +15,8 @@
     "android": "yarn tauri android dev",
     "build": "yarn build:web && yarn build:tauri",
     "build:macos:notarized": "bash scripts/macos-build-signed-notarized.sh",
+    "build:macos:standalone": "bash scripts/build-macos-standalone-dmg.sh",
+    "verify:standalone-bundles": "bash scripts/verify-standalone-bundles.sh",
     "clean:dev-cache": "bash scripts/clean-dev-cache.sh",
     "test": "vitest run",
     "test:watch": "vitest",

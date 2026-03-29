@@ -38,4 +38,12 @@ if [[ -d "$LLAMA_BIN" ]]; then
   done
 fi
 
+#? bitnet.cpp (Microsoft BitNet) llama-server — same layout as llamacpp-backend
+BITNET_BIN="$HERE/resources/bitnet-backend/build/bin"
+if [[ -d "$BITNET_BIN" ]]; then
+  for f in "$BITNET_BIN"/*; do
+    sign_if_macho "$f"
+  done
+fi
+
 #? sqlite-vec и др. — при появлении ошибок notary добавить сюда или расширить цикл.

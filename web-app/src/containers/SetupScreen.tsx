@@ -204,7 +204,7 @@ function SetupScreen({ onSkipped }: SetupScreenProps) {
                     draggable={false}
                   />
                 </div>
-                <span>Atomic Chat</span>
+                <span>onebit</span>
               </div>
               <div className="mb-3 min-w-0">
                 <span className="inline-block text-lg font-bold leading-snug sm:text-xl md:text-2xl">

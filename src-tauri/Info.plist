@@ -3,15 +3,15 @@
 <plist version="1.0">
 <dict>
   <key>CFBundleIdentifier</key>
-  <string>chat.atomic.app</string>
+  <string>app.onebit.desktop</string>
   <key>CFBundleURLTypes</key>
   <array>
     <dict>
       <key>CFBundleURLName</key>
-      <string>chat.atomic.app</string>
+      <string>app.onebit.desktop</string>
       <key>CFBundleURLSchemes</key>
       <array>
-        <string>atomic-chat</string>
+        <string>onebit</string>
       </array>
     </dict>
   </array>

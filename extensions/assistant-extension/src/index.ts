@@ -1,10 +1,32 @@
 import { Assistant, AssistantExtension, fs, joinPath } from '@janhq/core'
+
+const ONEBIT_ASSISTANT_INSTRUCTIONS = `You are onebit, a helpful AI assistant who assists users with their requests. onebit is built by Anirudh Malik.
+
+You must output your response in the exact language used in the latest user message. Do not provide translations or switch languages unless explicitly instructed to do so. If the input is mostly English, respond in English.
+
+When handling user queries:
+
+1. Think step by step about the query:
+   - Break complex questions into smaller, searchable parts
+   - Identify key search terms and parameters
+   - Consider what information is needed to provide a complete answer
+
+2. Mandatory logical analysis:
+   - Before engaging any tools, articulate your complete thought process in natural language. You must act as a "professional tool caller," demonstrating rigorous logic.
+   - Analyze the information gap: explicitly state what data is missing.
+   - Derive the strategy: explain why a specific tool is the logical next step.
+   - Justify parameters: explain why you chose those specific search keywords or that specific URL.
+
+You have tools to search for and access real-time, up-to-date data. Use them. Search before stating that you can't or don't know.
+
+Current date: {{current_date}}`
+
 /**
  * JanAssistantExtension is an AssistantExtension implementation that provides
  * functionality for managing assistants.
  */
 export default class JanAssistantExtension extends AssistantExtension {
-  private readonly CURRENT_MIGRATION_VERSION = 2
+  private readonly CURRENT_MIGRATION_VERSION = 3
   private readonly MIGRATION_FILE = 'file://assistants/.migration_version'
 
   /**
@@ -74,9 +96,15 @@ export default class JanAssistantExtension extends AssistantExtension {
     }
 
     if (currentVersion < 2) {
-      console.log('Running migration v2: Update to Menlo Research instructions')
-      await this.migrateToMenloInstructions()
+      console.log('Running migration v2: Update to onebit instructions')
+      await this.migrateToOnebitInstructionsV2()
       await this.saveMigrationVersion(2)
+    }
+
+    if (currentVersion < 3) {
+      console.log('Running migration v3: Update legacy upstream branding to onebit')
+      await this.migrateLegacyUpstreamBranding()
+      await this.saveMigrationVersion(3)
     }
 
     console.log(
@@ -127,30 +155,11 @@ export default class JanAssistantExtension extends AssistantExtension {
   }
 
   /**
-   * Migration v2: Update assistant instructions to Menlo Research format and set default parameters
+   * Migration v2: Update assistant instructions to onebit format and set default parameters
    */
-  private async migrateToMenloInstructions(): Promise<void> {
+  private async migrateToOnebitInstructionsV2(): Promise<void> {
     const OLD_INSTRUCTION_PREFIX = 'You are Jan, a helpful AI assistant.'
-    const NEW_INSTRUCTION = `You are Jan, a helpful AI assistant who assists users with their requests. Jan is trained by Menlo Research (https://www.menlo.ai).
-
-You must output your response in the exact language used in the latest user message. Do not provide translations or switch languages unless explicitly instructed to do so. If the input is mostly English, respond in English.
-
-When handling user queries:
-
-1. Think step by step about the query:
-   - Break complex questions into smaller, searchable parts
-   - Identify key search terms and parameters
-   - Consider what information is needed to provide a complete answer
-
-2. Mandatory logical analysis:
-   - Before engaging any tools, articulate your complete thought process in natural language. You must act as a "professional tool caller," demonstrating rigorous logic.
-   - Analyze the information gap: explicitly state what data is missing.
-   - Derive the strategy: explain why a specific tool is the logical next step.
-   - Justify parameters: explain why you chose those specific search keywords or that specific URL.
-
-You have tools to search for and access real-time, up-to-date data. Use them. Search before stating that you can't or don't know.
-
-Current date: {{current_date}}`
+    const NEW_INSTRUCTION = ONEBIT_ASSISTANT_INSTRUCTIONS
 
     const DEFAULT_PARAMETERS = {
       temperature: 0.7,
@@ -189,11 +198,53 @@ Current date: {{current_date}}`
             JSON.stringify(assistantWithParams, null, 2)
           )
           console.log(
-            `Migrated to Menlo instructions for assistant: ${assistant.id}`
+            `Migrated to onebit instructions for assistant: ${assistant.id}`
           )
         } catch (error) {
           console.error(`Failed to migrate assistant ${assistant.id}:`, error)
         }
+      }
+    }
+  }
+
+  /**
+   * Migration v3: Replace remaining upstream (Jan / Menlo / Atomic) wording with onebit branding.
+   */
+  private async migrateLegacyUpstreamBranding(): Promise<void> {
+    const legacyMarkers = [
+      'Menlo Research',
+      'You are Jan, a helpful AI assistant who assists',
+      'You are Atomic Chat',
+    ]
+
+    if (!(await fs.existsSync('file://assistants'))) {
+      return
+    }
+
+    const assistants = await this.getAssistants()
+
+    for (const assistant of assistants) {
+      const inst = assistant.instructions ?? ''
+      if (!legacyMarkers.some((m) => inst.includes(m))) continue
+
+      assistant.instructions = ONEBIT_ASSISTANT_INSTRUCTIONS
+
+      const assistantPath = await joinPath([
+        'file://assistants',
+        assistant.id,
+        'assistant.json',
+      ])
+
+      try {
+        await fs.writeFileSync(
+          assistantPath,
+          JSON.stringify(assistant, null, 2)
+        )
+        console.log(
+          `Migrated legacy branding to onebit for assistant: ${assistant.id}`
+        )
+      } catch (error) {
+        console.error(`Failed to migrate assistant ${assistant.id}:`, error)
       }
     }
   }
@@ -256,30 +307,11 @@ Current date: {{current_date}}`
     id: 'jan',
     object: 'assistant',
     created_at: Date.now() / 1000,
-    name: 'Jan',
+    name: 'onebit',
     description:
-      'Jan is a helpful desktop assistant that can reason through complex tasks and use tools to complete them on the user’s behalf.',
+      'onebit is a helpful desktop assistant that can reason through complex tasks and use tools to complete them on the user’s behalf.',
     model: '*',
-    instructions: `You are Jan, a helpful AI assistant who assists users with their requests. Jan is trained by Menlo Research (https://www.menlo.ai).
-
-You must output your response in the exact language used in the latest user message. Do not provide translations or switch languages unless explicitly instructed to do so. If the input is mostly English, respond in English.
-
-When handling user queries:
-
-1. Think step by step about the query:
-   - Break complex questions into smaller, searchable parts
-   - Identify key search terms and parameters
-   - Consider what information is needed to provide a complete answer
-
-2. Mandatory logical analysis:
-   - Before engaging any tools, articulate your complete thought process in natural language. You must act as a "professional tool caller," demonstrating rigorous logic.
-   - Analyze the information gap: explicitly state what data is missing.
-   - Derive the strategy: explain why a specific tool is the logical next step.
-   - Justify parameters: explain why you chose those specific search keywords or that specific URL.
-
-You have tools to search for and access real-time, up-to-date data. Use them. Search before stating that you can't or don't know.
-
-Current date: {{current_date}}`,
+    instructions: ONEBIT_ASSISTANT_INSTRUCTIONS,
     tools: [
       {
         type: 'retrieval',

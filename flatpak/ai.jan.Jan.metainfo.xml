@@ -3,9 +3,9 @@
   <id>ai.jan.Jan</id>
   <metadata_license>FSFAP</metadata_license>
   <project_license>Apache-2.0</project_license>
-  <developer_name>Menlo Research Pte. Ltd.</developer_name>
+  <developer_name>Anirudh Malik</developer_name>
 
-  <name>Jan</name>
+  <name>onebit</name>
   <icon type="stock">ai.jan.Jan</icon>
 
   <summary>Private offline AI assistant</summary>
@@ -48,11 +48,11 @@
     </ul>
 
     <p>
-      Jan is actively maintained by Menlo Research.  
+      onebit is actively maintained by Anirudh Malik.  
       Feedback, bug reports and feature requests are welcomed through GitHub.
     </p>
     <p xml:lang="pl">
-      Aplikacja Jan jest aktywnie utrzymywana przez Menlo Research.
+      Aplikacja onebit jest aktywnie utrzymywana przez Anirudh Malik.
       Informacje zwrotne, zgłoszenia błędów i prośby o nowe funkcje są mile widziane za pośrednictwem platformy GitHub.
     </p>
   </description>

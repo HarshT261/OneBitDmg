@@ -352,10 +352,19 @@ export async function handleSettingUpdate(
   })
 }
 
+/**
+ * Install a bundled llama-server into `<data>/llamacpp/backends/<version>/<backend>/`.
+ * @param backendsDir - e.g. `<janData>/llamacpp/backends`
+ * @param bundle - `"llamacpp"` (default) or `"bitnet"` for Microsoft BitNet / bitnet.cpp builds
+ */
 export async function installBundledBackend(
-  backendsDir: string
+  backendsDir: string,
+  bundle?: 'llamacpp' | 'bitnet'
 ): Promise<BundledBackendResult> {
-  return invoke('plugin:llamacpp|install_bundled_backend', { backendsDir })
+  return invoke('plugin:llamacpp|install_bundled_backend', {
+    backendsDir,
+    bundle: bundle ?? null,
+  })
 }
 
 export * from './types'

@@ -135,7 +135,7 @@ export function DataProvider() {
       .getAssistants()
       .then((data) => {
         if (data && Array.isArray(data) && data.length > 0) {
-          //? Миграция: ассистент с id 'jan' всегда подменяем на дефолт Atomic Chat (name/description/avatar)
+          //? Миграция: ассистент с id 'jan' всегда подменяем на дефолт onebit (name/description/avatar)
           const migrated = (data as unknown as Assistant[]).map((a) =>
             a.id === 'jan'
               ? { ...defaultAssistant, id: 'jan', created_at: a.created_at }

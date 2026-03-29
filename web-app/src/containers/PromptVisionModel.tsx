@@ -67,7 +67,7 @@ export function PromptVisionModel({
         setJanV2VLModel(catalogModel)
       }
     } catch (error) {
-      console.error('Error fetching Atomic Bot V2 VL Model:', error)
+      console.error('Error fetching onebit V2 VL Model:', error)
     } finally {
       setIsLoading(false)
     }
@@ -197,16 +197,16 @@ export function PromptVisionModel({
       <div className="flex items-center gap-2">
         <img
           src="/images/transparent-logo.png"
-          alt="Atomic Bot"
+          alt="onebit"
           className="size-5 dark:brightness-0 dark:invert"
         />
         <h2 className="font-medium">
-          Atomic Bot V2 VL Model
+          onebit V2 VL Model
           <span className="text-muted-foreground"> (~5GB)</span>
         </h2>
       </div>
       <p className="mt-2 text-sm text-muted-foreground">
-        Add vision capabilities to chat with images. Download Atomic Bot V2 VL,
+        Add vision capabilities to chat with images. Download onebit V2 VL,
         our recommended vision model.
       </p>
       <div className="mt-4 flex justify-end space-x-2">

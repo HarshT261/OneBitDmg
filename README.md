@@ -1,19 +1,19 @@
-<img src="https://github.com/AtomicBot-ai/Atomic-Chat/raw/main/assets/logo.png" width="80" alt="Atomic Chat" />
+<img src="https://github.com/AnirudhMalik/onebit/raw/main/assets/logo.png" width="80" alt="onebit" />
 
-# Atomic Chat
+# onebit
 
 Open-source ChatGPT alternative. Run local LLMs or connect cloud models — with full control and privacy.
 
-<a href="https://github.com/AtomicBot-ai/Atomic-Chat/stargazers"><img src="https://img.shields.io/github/stars/AtomicBot-ai/Atomic-Chat?style=flat&logo=github&label=Stars&color=f5c542" alt="Stars" /></a>&nbsp;
-<a href="https://github.com/AtomicBot-ai/Atomic-Chat/network/members"><img src="https://img.shields.io/github/forks/AtomicBot-ai/Atomic-Chat?style=flat&logo=github&label=Forks&color=4ac1f2" alt="Forks" /></a>&nbsp;
-<a href="https://github.com/AtomicBot-ai/Atomic-Chat/commits/main"><img src="https://img.shields.io/github/last-commit/AtomicBot-ai/Atomic-Chat?style=flat&label=Last%20Commit&color=blueviolet" alt="Last Commit" /></a>&nbsp;
+<a href="https://github.com/AnirudhMalik/onebit/stargazers"><img src="https://img.shields.io/github/stars/AnirudhMalik/onebit?style=flat&logo=github&label=Stars&color=f5c542" alt="Stars" /></a>&nbsp;
+<a href="https://github.com/AnirudhMalik/onebit/network/members"><img src="https://img.shields.io/github/forks/AnirudhMalik/onebit?style=flat&logo=github&label=Forks&color=4ac1f2" alt="Forks" /></a>&nbsp;
+<a href="https://github.com/AnirudhMalik/onebit/commits/main"><img src="https://img.shields.io/github/last-commit/AnirudhMalik/onebit?style=flat&label=Last%20Commit&color=blueviolet" alt="Last Commit" /></a>&nbsp;
 <img src="https://img.shields.io/badge/Built_with-Tauri-FFC131?style=flat&logo=tauri&logoColor=white" alt="Tauri" />&nbsp;
 <img src="https://img.shields.io/badge/Runtime-Node.js_≥20-339933?style=flat&logo=nodedotjs&logoColor=white" alt="Node.js" />
 
-[Getting Started](https://atomic.chat/) · [Discord](https://discord.com/invite/AbWHHdKT) · [X / Twitter](https://x.com/atomic_chat_hq) · [Bug Reports](https://github.com/AtomicBot-ai/Atomic-Chat/issues)
+[Bug Reports](https://github.com/AnirudhMalik/onebit/issues)
 
 <p align="center">
-  <img src="https://github.com/AtomicBot-ai/Atomic-Chat/raw/main/assets/preview.png" width="100%" alt="Atomic Chat Interface" />
+  <img src="https://github.com/AnirudhMalik/onebit/raw/main/assets/preview.png" width="100%" alt="onebit interface" />
 </p>
 
 ---
@@ -22,9 +22,9 @@ Open-source ChatGPT alternative. Run local LLMs or connect cloud models — with
 
 |                       |                                                                          |
 | --------------------- | ------------------------------------------------------------------------ |
-| **macOS (Universal)** | [atomic-chat.dmg](https://github.com/AtomicBot-ai/Atomic-Chat/releases/tag/v1.0.23) |
+| **macOS (Universal)** | [Releases](https://github.com/AnirudhMalik/onebit/releases) |
 
-Download from [atomic.chat](https://atomic.chat/) or [GitHub Releases](https://github.com/AtomicBot-ai/Atomic-Chat/releases).
+Download from [GitHub Releases](https://github.com/AnirudhMalik/onebit/releases).
 
 ---
 
@@ -52,8 +52,8 @@ Download from [atomic.chat](https://atomic.chat/) or [GitHub Releases](https://g
 #### Run with Make
 
 ```bash
-git clone https://github.com/AtomicBot-ai/Atomic-Chat
-cd Atomic-Chat
+git clone https://github.com/AnirudhMalik/onebit
+cd onebit
 make dev
 ```
 
@@ -78,6 +78,66 @@ yarn dev
 
 ---
 
+### BitNet b1.58 (bitnet.cpp) and standalone macOS builds
+
+This fork bundles **two** local inference backends inside the app:
+
+| Bundle | Purpose |
+|--------|---------|
+| **llamacpp-backend** | Stock **llama.cpp** `llama-server` (GGUF models from Hugging Face). Downloaded at build time via `make download-llamacpp-backend` (not committed; large). |
+| **bitnet-backend** | **Microsoft BitNet / bitnet.cpp** `llama-server` for **1.58-bit BitNet GGUF** (e.g. `ggml-model-i2_s.gguf`). The normal backend cannot load these files. **Vendored in the repo** under `src-tauri/resources/bitnet-backend/` so installs work on any Mac without another project on disk. |
+
+**Runtime behavior**
+
+- On startup, the Llama.cpp extension installs both bundles from `Contents/Resources` into the app data folder (when present).
+- In **Settings → Llama.cpp → Version & backend**, pick the BitNet line (e.g. `onebit-suite-bitnet/mac-arm64-bitnet`) before using a BitNet model; use the default/turboquant line for ordinary GGUF models.
+
+**Rust / JS changes (high level)**
+
+- `tauri-plugin-llamacpp`: `install_bundled_backend(backendsDir, bundle?)` with `bundle: 'bitnet'` reading `resources/bitnet-backend/` (same layout as `llamacpp-backend`: `version.txt`, `backend.txt`, `build/bin/llama-server`).
+- `extensions/llamacpp-extension`: after the stock bundle, calls `installBundledBackend(backendsDir, 'bitnet')`.
+- `tauri.conf.json` / `tauri.macos.conf.json`: `resources/bitnet-backend/` included in the bundle.
+- `scripts/sign-macos-resource-binaries.sh`: signs Mach-O binaries under `resources/bitnet-backend/build/bin/` for notarization.
+- `.github/workflows/release-macos.yml`: **Verify standalone bundles** step runs `scripts/verify-standalone-bundles.sh` so CI fails if BitNet is missing from the tree.
+
+**One-time: populate BitNet into the repo**
+
+From a local [OneBitAI Suite](https://github.com/anirudhmlik/onebit-1.58)-style tree that already has `bin/mac/llama-server-bitnet` and BitNet dylibs:
+
+```bash
+./scripts/sync-bitnet-from-onebit-suite.sh "/path/to/OneBitAI_Suite"
+git add src-tauri/resources/bitnet-backend
+git commit -m "Bundle BitNet backend for standalone DMG"
+```
+
+Or build from upstream [microsoft/BitNet](https://github.com/microsoft/BitNet) and copy `build/bin/llama-server` — see `src-tauri/resources/bitnet-backend/BUILD.txt`.
+
+**Scripts**
+
+| Script | Role |
+|--------|------|
+| `scripts/sync-bitnet-from-onebit-suite.sh` | Copies `llama-server-bitnet` → `build/bin/llama-server` + dylibs into `bitnet-backend/`. Requires `ONEBIT_SUITE` env or path as first argument. |
+| `scripts/build-bitnet-backend.sh` | If `ONEBIT_SUITE` is set, runs the sync script; otherwise builds from a `BitNet` source clone. |
+| `scripts/verify-standalone-bundles.sh` | Ensures llamacpp + bitnet bundles exist before packaging (macOS). |
+| `scripts/build-macos-standalone-dmg.sh` | Full pipeline: download llamacpp if needed, verify bundles, web + extensions + native deps, `tauri build` universal macOS. |
+
+**Yarn**
+
+```bash
+yarn verify:standalone-bundles   # sanity check
+yarn build:macos:standalone      # produce .app + .dmg under src-tauri/target/.../bundle/dmg/
+```
+
+**Git**
+
+- `src-tauri/resources/**` is ignored except **`src-tauri/resources/bitnet-backend/**`**, so BitNet binaries can be committed for reproducible DMGs and CI.
+
+**Branding / product**
+
+- App name **onebit**, team **Anirudh Malik**, pixel logo under `web-app/public/images/` and Tauri icons; upstream “Jan” naming removed in many UI paths (see recent commits).
+
+---
+
 ### System Requirements
 
 - **macOS**: 13.6+ (8GB RAM for 3B models, 16GB for 7B, 32GB for 13B)
@@ -89,8 +149,7 @@ yarn dev
 If something isn't working:
 
 1. Copy your error logs and system specs
-2. Open an issue on [GitHub](https://github.com/AtomicBot-ai/Atomic-Chat/issues)
-3. Or ask for help in our [Discord](https://discord.com/invite/AbWHHdKT) `#🆘|atomic-chat-help` channel
+2. Open an issue on [GitHub](https://github.com/AnirudhMalik/onebit/issues)
 
 ---
 
@@ -99,18 +158,15 @@ If something isn't working:
 Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 <p align="center">
-  <a href="https://discord.com/invite/AbWHHdKT"><img src="https://img.shields.io/badge/💬_Chat_on-Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" /></a>&nbsp;
-  <a href="https://github.com/AtomicBot-ai/Atomic-Chat/issues"><img src="https://img.shields.io/badge/🐛_Report-Issues-FF4444?style=for-the-badge" alt="Report Issues" /></a>&nbsp;
-  <a href="https://github.com/AtomicBot-ai/Atomic-Chat/pulls"><img src="https://img.shields.io/badge/🔀_Submit-PRs-44CC11?style=for-the-badge" alt="Submit PRs" /></a>
+  <a href="https://github.com/AnirudhMalik/onebit/issues"><img src="https://img.shields.io/badge/🐛_Report-Issues-FF4444?style=for-the-badge" alt="Report Issues" /></a>&nbsp;
+  <a href="https://github.com/AnirudhMalik/onebit/pulls"><img src="https://img.shields.io/badge/🔀_Submit-PRs-44CC11?style=for-the-badge" alt="Submit PRs" /></a>
 </p>
 
 ---
 
 ### Contact
 
-- **Bugs**: [GitHub Issues](https://github.com/AtomicBot-ai/Atomic-Chat/issues)
-- **General Discussion**: [Discord](https://discord.com/invite/AbWHHdKT)
-- **Updates**: [X / Twitter](https://x.com/atomic_chat_hq)
+- **Bugs**: [GitHub Issues](https://github.com/AnirudhMalik/onebit/issues)
 
 ---
 
@@ -123,11 +179,12 @@ Apache 2.0 — see [LICENSE](LICENSE) for details.
 Built on the shoulders of giants:
 
 - [Llama.cpp](https://github.com/ggerganov/llama.cpp)
+- [Microsoft BitNet / bitnet.cpp](https://github.com/microsoft/BitNet) (optional bundled backend)
 - [Tauri](https://tauri.app/)
 - [Scalar](https://github.com/scalar/scalar)
 
 ---
 
 <p align="center">
-  <sub>© 2026 Atomic Chat · Built with ❤️ · <a href="https://atomic.chat">atomic.chat</a></sub>
+  <sub>© 2026 onebit · Team: Anirudh Malik</sub>
 </p>

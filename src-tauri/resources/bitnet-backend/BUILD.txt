@@ -1,0 +1,65 @@
+BitNet b1.58 (bitnet.cpp) bundled backend — optional
+=====================================================
+
+Standalone DMG (no paths on the target Mac)
+-------------------------------------------
+1. Populate this folder once on your build machine (OneBitAI Suite sync or BitNet build — below).
+2. Commit the whole bitnet-backend/ tree. It is not gitignored so CI and clones carry the binaries.
+3. Build the disk image:
+
+     yarn build:macos:standalone
+
+   Or notarized release: set APPLE_* env vars, then yarn build:macos:notarized
+
+The app installs BitNet from Contents/Resources; users do not need OneBitAI_Suite or Microsoft BitNet source.
+
+OneBitAI Suite (quick copy on your machine)
+--------------------------------------------
+If you have OneBitAI_Suite with prebuilt mac binaries:
+
+  export ONEBIT_SUITE="/path/to/OneBitAI_Suite backup + web agent"
+  ./scripts/sync-bitnet-from-onebit-suite.sh
+
+Or in one step:
+
+  ONEBIT_SUITE="/path/to/OneBitAI_Suite backup + web agent" ./scripts/build-bitnet-backend.sh
+
+This copies bin/mac/llama-server-bitnet → build/bin/llama-server plus libggml-bitnet.dylib /
+libllama-bitnet.dylib so the Tauri app can spawn the same BitNet server the suite uses.
+
+Optional web agent (search + fetch) from that suite: webtools/start_webtools.sh (port 8081).
+
+---
+
+This folder must mirror the layout of resources/llamacpp-backend/:
+
+  version.txt     — single line, e.g. bitnet-cpp-1.0
+  backend.txt     — single line, e.g. bitnet-b1.58-2B-cpu
+  build/bin/      — llama-server from the Microsoft BitNet build (and any co-shipped libs)
+
+Microsoft BitNet builds an OpenAI-compatible llama-server (same HTTP API as this app uses).
+Stock llama.cpp binaries cannot load BitNet 1.58-bit GGUF files (e.g. ggml-model-i2_s.gguf).
+
+Official instructions: https://github.com/microsoft/BitNet
+
+Typical flow (after installing cmake, clang, Python deps from BitNet README):
+
+  git clone --recursive https://github.com/microsoft/BitNet.git
+  cd BitNet
+  pip install -r requirements.txt
+  huggingface-cli download microsoft/BitNet-b1.58-2B-4T-gguf --local-dir models/BitNet-b1.58-2B-4T-gguf
+  python setup_env.py -md models/BitNet-b1.58-2B-4T-gguf -q i2_s
+
+Then copy the built server into src-tauri/resources/bitnet-backend/:
+
+  mkdir -p src-tauri/resources/bitnet-backend/build/bin
+  cp build/bin/llama-server src-tauri/resources/bitnet-backend/build/bin/
+  (copy any required dylibs/so/dll next to llama-server if your build needs them)
+
+  echo -n 'bitnet-cpp-1.0' > version.txt
+  echo -n 'bitnet-b1.58-2B-cpu' > backend.txt
+
+Rebuild the app. On first run, Settings → Llama.cpp → Version & Backend will list
+<version>/<backend>; select it before loading a BitNet GGUF model.
+
+See also: scripts/build-bitnet-backend.sh (helper; requires BitNet repo and HF download).

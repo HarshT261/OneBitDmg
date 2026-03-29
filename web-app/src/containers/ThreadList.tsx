@@ -31,7 +31,7 @@ import { ThreadMessage } from '@janhq/core'
 
 //* Заголовок приветственного треда: новый бренд и старая строка из прошлых версий
 const WELCOME_THREAD_TITLES = new Set([
-  'What is Atomic Bot?',
+  'What is onebit?',
   'What is Overchat?',
 ])
 

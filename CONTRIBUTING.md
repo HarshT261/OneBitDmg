@@ -1,8 +1,8 @@
-# Contributing to Atomic Chat
+# Contributing to onebit
 
-First off, thank you for considering contributing to Atomic Chat. It's people like you that make Atomic Chat such an amazing project.
+First off, thank you for considering contributing to onebit. It's people like you that make onebit such an amazing project.
 
-Atomic Chat is an AI assistant that can run 100% offline on your device. Think ChatGPT, but private, local, and under your complete control. If you're thinking about contributing, you're already awesome - let's make AI accessible to everyone, one commit at a time.
+onebit is an AI assistant that can run 100% offline on your device. Think ChatGPT, but private, local, and under your complete control. If you're thinking about contributing, you're already awesome - let's make AI accessible to everyone, one commit at a time.
 
 ## Quick Links to Component Guides
 
@@ -12,9 +12,9 @@ Atomic Chat is an AI assistant that can run 100% offline on your device. Think C
 - **[Tauri Backend](./src-tauri/CONTRIBUTING.md)** - Rust native integration
 - **[Tauri Plugins](./src-tauri/plugins/CONTRIBUTING.md)** - Hardware and system plugins
 
-## How Atomic Chat Actually Works
+## How onebit Actually Works
 
-Atomic Chat is a desktop app that runs local AI models. Here's how the components actually connect:
+onebit is a desktop app that runs local AI models. Here's how the components actually connect:
 
 ```
 ┌──────────────────────────────────────────────────────────┐
@@ -109,7 +109,7 @@ Here's what actually happens when you click "Download Llama 3":
 ## Project Structure
 
 ```
-Atomic-Chat/
+onebit/
 ├── web-app/              # React frontend (what users see)
 ├── src-tauri/            # Rust backend (system integration)
 │   ├── src/core/         # Core Tauri commands
@@ -144,8 +144,8 @@ Atomic-Chat/
 
 **Option 1: The Easy Way (Make)**
 ```bash
-git clone https://github.com/AtomicBot-ai/Atomic-Chat
-cd Atomic-Chat
+git clone https://github.com/AnirudhMalik/onebit
+cd onebit
 make dev
 ```
 
@@ -153,8 +153,8 @@ make dev
 
 ### Reporting Bugs
 
-- **Ensure the bug was not already reported** by searching on GitHub under [Issues](https://github.com/AtomicBot-ai/Atomic-Chat/issues)
-- If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/AtomicBot-ai/Atomic-Chat/issues/new)
+- **Ensure the bug was not already reported** by searching on GitHub under [Issues](https://github.com/AnirudhMalik/onebit/issues)
+- If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/AnirudhMalik/onebit/issues/new)
 - Include your system specs and error logs - it helps a ton
 
 ### Suggesting Enhancements
@@ -225,7 +225,7 @@ docs: update installation instructions
 
 If things go sideways:
 
-1. **Check [GitHub Issues](https://github.com/AtomicBot-ai/Atomic-Chat/issues) for known problems**
+1. **Check [GitHub Issues](https://github.com/AnirudhMalik/onebit/issues) for known problems**
 2. **Clear everything and start fresh:** `make clean` then `make dev`
 3. **Copy your error logs and system specs**
 4. **Ask for help in our [Discord](https://discord.com/invite/AbWHHdKT)** `#🆘|atomic-chat-help` channel
@@ -237,10 +237,10 @@ Common issues:
 
 ## Getting Help
 
-- [Documentation](https://github.com/AtomicBot-ai/Atomic-Chat#readme) - Project overview and setup
+- [Documentation](https://github.com/AnirudhMalik/onebit#readme) - Project overview and setup
 - [Discord Community](https://discord.com/invite/AbWHHdKT) - Where the community lives
-- [GitHub Issues](https://github.com/AtomicBot-ai/Atomic-Chat/issues) - Report bugs here
-- [GitHub Discussions](https://github.com/AtomicBot-ai/Atomic-Chat/discussions) - Ask questions
+- [GitHub Issues](https://github.com/AnirudhMalik/onebit/issues) - Report bugs here
+- [GitHub Discussions](https://github.com/AnirudhMalik/onebit/discussions) - Ask questions
 
 ## License
 

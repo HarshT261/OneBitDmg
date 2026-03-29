@@ -630,7 +630,7 @@ fn jan_cli_bin_dir_windows() -> Result<PathBuf, String> {
         .map_err(|_| "Cannot determine LOCALAPPDATA".to_string())?;
     Ok(PathBuf::from(local_app_data)
         .join("Programs")
-        .join("Atomic Chat")
+        .join("onebit")
         .join("resources")
         .join("bin"))
 }

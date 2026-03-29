@@ -41,7 +41,9 @@ lerna-debug.log*
 # Rust / Cargo
 target/
 Cargo.lock
-src-tauri/resources/
+src-tauri/resources/**
+!src-tauri/resources/bitnet-backend/
+!src-tauri/resources/bitnet-backend/**
 src-tauri/resources/lib
 src-tauri/resources/bin
 src-tauri/icons/*

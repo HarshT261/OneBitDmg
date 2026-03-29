@@ -318,6 +318,24 @@ export default class llamacpp_extension extends AIEngine {
     }
   }
 
+  /** Microsoft BitNet (bitnet.cpp) ships a compatible `llama-server`; install if bundled in app resources. */
+  private async tryInstallBundledBitnetBackend(): Promise<void> {
+    try {
+      const janDataFolderPath = await getJanDataFolderPath()
+      const backendsDir = await joinPath([
+        janDataFolderPath,
+        'llamacpp',
+        'backends',
+      ])
+      const result = await installBundledBackend(backendsDir, 'bitnet')
+      if (result.installed && result.backend_string) {
+        logger.info(`Bundled BitNet backend installed: ${result.backend_string}`)
+      }
+    } catch (e) {
+      logger.warn('Failed to install bundled BitNet backend:', e)
+    }
+  }
+
   async configureBackends(): Promise<void> {
     if (this.isConfiguringBackends) {
       logger.info(
@@ -331,6 +349,7 @@ export default class llamacpp_extension extends AIEngine {
     try {
       // Install bundled backend from app resources if no local backends exist
       const bundledBackendString = await this.tryInstallBundledBackend()
+      await this.tryInstallBundledBitnetBackend()
 
       let version_backends: { version: string; backend: string }[] = []
 

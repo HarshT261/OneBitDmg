@@ -96,7 +96,7 @@ function General() {
       )
       setCliInstalled(s.installed)
       setCliPath(s.path)
-      toast.success(`Atomic Bot CLI installed to ${s.path}`)
+      toast.success(`onebit CLI installed to ${s.path}`)
     } catch (e) {
       toast.error('Install failed', { description: String(e) })
     } finally {
@@ -110,7 +110,7 @@ function General() {
       await invoke('uninstall_jan_cli')
       setCliInstalled(false)
       setCliPath(null)
-      toast.success('Atomic Bot CLI uninstalled')
+      toast.success('onebit CLI uninstalled')
     } catch (e) {
       toast.error('Uninstall failed', { description: String(e) })
     } finally {
@@ -395,7 +395,7 @@ function General() {
             <Card title="Advanced">
               {IS_TAURI && (
                 <CardItem
-                  title="Atomic Bot CLI"
+                  title="onebit CLI"
                   description={
                     cliInstalled && cliPath
                       ? `Installed at ${cliPath} — run jan-cli from your terminal to serve models.`
@@ -562,7 +562,7 @@ function General() {
                   description={t('settings:general.releaseNotesDesc')}
                   actions={
                     <a
-                      href="https://github.com/AtomicBot-ai/Atomic-Chat/releases"
+                      href="https://github.com/AnirudhMalik/onebit/releases"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -584,7 +584,7 @@ function General() {
                   description={t('settings:general.githubDesc')}
                   actions={
                     <a
-                      href="https://github.com/AtomicBot-ai/Atomic-Chat"
+                      href="https://github.com/AnirudhMalik/onebit"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -622,7 +622,7 @@ function General() {
                   description={t('settings:general.reportAnIssueDesc')}
                   actions={
                     <a
-                      href="https://github.com/AtomicBot-ai/Atomic-Chat/issues/new"
+                      href="https://github.com/AnirudhMalik/onebit/issues/new"
                       target="_blank"
                     >
                       <div className="flex items-center gap-1">

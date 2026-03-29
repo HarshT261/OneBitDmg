@@ -500,7 +500,7 @@ function MCPServersDesktop() {
                             <div className="flex items-center gap-1.5 px-2 py-0.5 text-xs bg-secondary border rounded-sm">
                               <img
                                 src="/images/transparent-logo.png"
-                                alt="Atomic Bot"
+                                alt="onebit"
                                 className="w-3 h-3 object-contain"
                               />
                               <span>Official</span>
@@ -538,7 +538,7 @@ function MCPServersDesktop() {
                               {config.official && (
                                 <div className="mt-2 text-xs text-muted-foreground pt-2">
                                   <p className="mb-1">
-                                    Requires the Atomic Bot browser extension to
+                                    Requires the onebit browser extension to
                                     be installed in your Chrome-based browser.
                                   </p>
                                   <a
