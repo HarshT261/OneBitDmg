@@ -44,9 +44,9 @@ Download from [GitHub Releases](https://github.com/AnirudhMalik/onebit/releases)
 #### Prerequisites
 
 - Node.js ≥ 20.0.0
-- Yarn ≥ 4.5.3
+- Yarn ≥ 4.5.3 (via Corepack; see **Yarn** under BitNet section if `yarn` is missing)
 - Make ≥ 3.81
-- Rust (for Tauri)
+- **Rust** — `cargo` on your `PATH`. Easiest on macOS with Homebrew: `brew install rust rustup`, then `export PATH="/opt/homebrew/opt/rustup/bin:$PATH"`, `rustup default stable`, and `rustup target add aarch64-apple-darwin x86_64-apple-darwin` (needed for the universal `jan-cli` / Tauri build). Or install [rustup.rs](https://rustup.rs/) (adds `~/.cargo/bin`; creates `~/.cargo/env`).
 - (Apple Silicon) MetalToolchain `xcodebuild -downloadComponent MetalToolchain`
 
 #### Run with Make
@@ -119,13 +119,25 @@ Or build from upstream [microsoft/BitNet](https://github.com/microsoft/BitNet) a
 | `scripts/sync-bitnet-from-onebit-suite.sh` | Copies `llama-server-bitnet` → `build/bin/llama-server` + dylibs into `bitnet-backend/`. Requires `ONEBIT_SUITE` env or path as first argument. |
 | `scripts/build-bitnet-backend.sh` | If `ONEBIT_SUITE` is set, runs the sync script; otherwise builds from a `BitNet` source clone. |
 | `scripts/verify-standalone-bundles.sh` | Ensures llamacpp + bitnet bundles exist before packaging (macOS). |
-| `scripts/build-macos-standalone-dmg.sh` | Full pipeline: download llamacpp if needed, verify bundles, web + extensions + native deps, `tauri build` universal macOS. |
+| `scripts/build-macos-standalone-dmg.sh` | Full pipeline: download llamacpp if needed, verify bundles, then **`build:tauri:plugin:api` → `build:core` → `build:extensions:darwin`** (same order as `make install-and-build`), then web + icons + native bins, `tauri build` universal macOS. |
 
 **Yarn**
 
+Use Corepack (Yarn 4 is pinned in `package.json`). Put Homebrew first on `PATH` so Corepack is not the old one under `/usr/local` (which can error with `EACCES` on symlinks).
+
+If `yarn` is missing or Corepack is broken, run Yarn via the helper (installs `corepack` through Homebrew’s `npm` once if needed):
+
 ```bash
-yarn verify:standalone-bundles   # sanity check
-yarn build:macos:standalone      # produce .app + .dmg under src-tauri/target/.../bundle/dmg/
+chmod +x scripts/yarn-here.sh
+./scripts/yarn-here.sh install
+./scripts/yarn-here.sh build:macos:standalone
+```
+
+Or after `export PATH="/opt/homebrew/bin:$PATH"` and `npm install -g corepack` (Homebrew npm), use `corepack prepare yarn@4.5.3 --activate` and then `yarn` as usual.
+
+```bash
+yarn verify:standalone-bundles
+yarn build:macos:standalone
 ```
 
 **Git**
@@ -146,7 +158,13 @@ yarn build:macos:standalone      # produce .app + .dmg under src-tauri/target/..
 
 ### Troubleshooting
 
-If something isn't working:
+**`yarn`: command not found / Corepack `EACCES` / wrong `corepack` path**
+
+- Use **`./scripts/yarn-here.sh`** (see above), or ensure `which node` and `which corepack` are under `/opt/homebrew/bin`, not `/usr/local`.
+- Do not paste commented lines from docs into zsh as-is; lines in parentheses can trigger `zsh: no matches found`.
+- Homebrew Node 25 may not ship `corepack.js` at `$(brew --prefix node)/lib/node_modules/corepack/...`; install the CLI with: `/opt/homebrew/bin/npm install -g corepack`.
+
+If something else isn’t working:
 
 1. Copy your error logs and system specs
 2. Open an issue on [GitHub](https://github.com/AnirudhMalik/onebit/issues)
