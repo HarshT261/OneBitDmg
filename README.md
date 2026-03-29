@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/anirudhmlik/onebit/raw/main/OneBitDmg/docs/public/assets/images/onebit-logo.png" width="80" alt="OneBit AI" />
+  <img src="https://github.com/anirudhmlik/onebit/raw/main/OneBitDmg/assets/logo.png" width="80" alt="OneBit AI" />
 </p>
 
 <p align="center">
